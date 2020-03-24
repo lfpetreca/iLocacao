@@ -1,0 +1,9 @@
+@import '../../assets/scss/variables';
+
+.layout { display: flex; flex-direction: row; height: 90vh; background-color: $mainBg;
+    &__sidebar{ width: 50px; }
+    
+    &__sidebar.showSideBar { width: 350px; }
+    
+    &__content { position: relative; background-color: white; width: 100%; }
+}

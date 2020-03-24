@@ -1,0 +1,13 @@
+@import '../../../../assets/scss/variables';
+
+.sidebar {
+    background-color: $mainBg;
+    
+    &__menuList{ display: flex; flex-direction: column; flex-wrap: wrap; justify-content: flex-start;
+        &_item{ flex: 1; padding: 15px; background-color: $mainBg; border-bottom: 3px solid transparentize($color: #000000, $amount: 0); color: $grey; text-decoration: none;
+            i { margin-right: 10px; }
+            
+            &:hover { color: white; background-color: #333; }
+        }
+    } 
+}

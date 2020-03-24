@@ -1,0 +1,30 @@
+<header class="header">
+    <div class="header__logo">
+        <a routerLink="/" class="header__logo_item">
+            <span>iLocação</span>&nbsp;
+            <i class="fas fa-house-user"></i>
+        </a>
+        <a (click)="toggleSideBar()" class="header__logo_sideBarMenu">
+            <i class="fas fa-bars"></i>
+        </a>
+    </div>
+    <div class="header__topMenu">
+        <ul>
+            <li>
+                <a routerLink="" title="Profile">
+                    <i class="fas fa-user"></i>
+                </a>
+            </li>
+            <li >
+                <a routerLink="" title="Settings">
+                    <i class="fas fa-cogs"></i>
+                </a>
+            </li>
+            <li>
+                <a routerLink="" title="Log-ut">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </li>            
+        </ul>
+    </div>
+</header>
