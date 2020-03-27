@@ -9,7 +9,10 @@ export class SignupComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() { }
+
+  onRegister() {
+    localStorage.setItem('isLoggedin', 'true');
   }
 
 }

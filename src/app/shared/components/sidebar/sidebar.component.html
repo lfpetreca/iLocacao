@@ -1,16 +1,21 @@
-<nav class="sidebar">
-    <div class="sidebar__menuList">
-        <a routerLink="/home" class="sidebar__menuList_item" >
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
+    <div class="list-group">
+        <a routerLink="/home"  [routerLinkActive]="['active']" class="list-group-item" >
             <i class="fas fa-home"></i>
             <span>Home</span>
         </a>
-         <a [routerLink]="['/lessee']" class="sidebar__menuList_item">
+         <a [routerLink]="['/lessees']" [routerLinkActive]="['active']" class="list-group-item">
             <i class="fas fa-chart-line"></i>
-            <span>Lessee</span>
+            <span>Lessees</span>
         </a>
-        <a [routerLink]="['/renter']" class="sidebar__menuList_item">
+        <a [routerLink]="['/renters']" [routerLinkActive]="['active']" class="list-group-item">
             <i class="fas fa-table"></i>
-            <span>Renter</span>
+            <span>Renters</span>
         </a>
+    </div>
+
+    <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
+        <i class="fa fa-angle-double-{{collapsed?'right':'left'}}"></i>&nbsp;
+        <span>Collapse Sidebar</span>
     </div>
 </nav>

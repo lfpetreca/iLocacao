@@ -1,13 +1,20 @@
 @import '../../../../assets/scss/variables';
 
-.sidebar {
-    background-color: $mainBg;
-    
-    &__menuList{ display: flex; flex-direction: column; flex-wrap: wrap; justify-content: flex-start;
-        &_item{ flex: 1; padding: 15px; background-color: $mainBg; border-bottom: 3px solid transparentize($color: #000000, $amount: 0); color: $grey; text-decoration: none;
-            i { margin-right: 10px; }
-            
-            &:hover { color: white; background-color: #333; }
-        }
-    } 
+.sidebar { position: fixed; top: 56px; left: 235px; width: 235px; margin-left: -235px; margin-bottom: 48px; border: none; border-radius: 0; overflow-y: auto; background-color: $mainBg; bottom: 0; padding-bottom: 40px; border-top: 1px solid $grey; white-space: nowrap; transition: all 0.2s ease-in-out; }
+
+.toggle-button { position: fixed; width: 236px; cursor: pointer; padding: 12px; bottom: 0; color: $grey; background: #212529; border-top: 1px solid $grey; transition: all 0.2s ease-in-out;
+    i { font-size: 23px; }
+    &:hover { background: darken($mainBg, 5%); color: #fff; }
+}
+
+.collapsed { width: 60px;
+    span { display: none; }
+}
+
+@media screen and (max-width: 992px) {
+    .sidebar { top: 54px; left: 0px; }
+}
+
+@media print {
+    .sidebar { display: none !important; }
 }

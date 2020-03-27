@@ -1,10 +1,8 @@
-<app-header (toggleSideBarForMe)="sideBarToggler()"></app-header>
+<app-header></app-header>
+<app-sidebar (collapsedEvent)="receiveCollapsed($event)"></app-sidebar>
 
-<section class="layout">
-    <div class="layout__sidebar" [class.showSideBar]="sideBarOpen">
-        <app-sidebar></app-sidebar>
-    </div>
-    <main class="layout__content">
-        <app-dashboard></app-dashboard>
-    </main>
-</section>
+<main class="main-container" [ngClass]="{collapsed: collapedSideBar}">        
+    <router-outlet></router-outlet>   
+</main>  
+
+<app-footer></app-footer>

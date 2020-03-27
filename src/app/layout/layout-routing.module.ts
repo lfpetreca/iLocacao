@@ -9,8 +9,8 @@ const routes: Routes = [{
   children: [
     { path: '', redirectTo: 'home', pathMatch: 'prefix' },
     { path: 'home', loadChildren: () => import('../modules/home/home.module').then(m => m.HomeModule) },
-    { path: 'lessee', loadChildren: () => import('../modules/lessee/lessee.module').then(m => m.LesseeModule) },
-    { path: 'renter', loadChildren: () => import('../modules/renter/renter.module').then(m => m.RenterModule) }
+    { path: 'lessees', loadChildren: () => import('../modules/lessees/lessees.module').then(m => m.LesseesModule) },
+    { path: 'renters', loadChildren: () => import('../modules/renters/renters.module').then(m => m.RentersModule) }
   ]
 }];
 

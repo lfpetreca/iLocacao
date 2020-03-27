@@ -1,9 +1,27 @@
 @import '../../assets/scss/variables';
 
-.layout { display: flex; flex-direction: row; height: 90vh; background-color: $mainBg;
-    &__sidebar{ width: 50px; }
-    
-    &__sidebar.showSideBar { width: 350px; }
-    
-    &__content { position: relative; background-color: white; width: 100%; }
+.main-container {
+    margin-top: 60px;
+    margin-left: 235px;
+    padding: 15px;
+    -ms-overflow-x: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: relative;
+    overflow: hidden;
 }
+.collapsed {
+    margin-left: 60px;
+}
+@media screen and (max-width: 992px) {
+    .main-container {
+        margin-left: 0px !important;
+    }
+}
+@media print {
+    .main-container {
+        margin-top: 0px !important;
+        margin-left: 0px !important;
+    }
+}
+

@@ -7,15 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  sideBarOpen: Boolean = true;
+  collapedSideBar: boolean;
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
-  sideBarToggler() {
-    this.sideBarOpen = !this.sideBarOpen;
+  receiveCollapsed($event) {
+    this.collapedSideBar = $event;
   }
 
 }
