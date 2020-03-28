@@ -6,31 +6,6 @@
         .navbar-brand { padding: 2px 20px; background-color: white; color: $primary; border-radius: 10px; text-decoration: none; font-size: 1.5rem;
             span { font-family: 'Sen', sans-serif; }
         }
-        .nav-item > a {
-            color: #fff;
-        }
-    }
-    .messages {
-        width: 300px;
-        .media {
-            border-bottom: 1px solid #ddd;
-            padding: 5px 10px;
-            &:last-child {
-                border-bottom: none;
-            }
-        }
-        .media-body {
-            h5 {
-                font-size: 13px;
-                font-weight: 600;
-            }
-            .small {
-                margin: 0;
-            }
-            .last {
-                font-size: 12px;
-                margin: 0;
-            }
-        }
-    }
+        .navbar-toggler, .nav-item > a { color: white; }
+    }   
 }

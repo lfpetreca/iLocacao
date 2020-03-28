@@ -14,31 +14,31 @@
                 <li class="nav-item dropdown" ngbDropdown>
                     <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                         <i class="fa fa-language"></i>
-                        Language
+                        {{ 'Language' | translate }}
                     </a>
                     <div class="dropdown-menu-right" ngbDropdownMenu>
                         <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('en')">
-                            English
+                            {{ 'English' | translate }}
                         </a>
                         <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('pt')">
-                            Portuguese
+                            {{ 'Portuguese' | translate }}
                         </a>
                     </div>
                 </li>
 
                 <li class="nav-item dropdown" ngbDropdown>
                     <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
-                        <i class="fa fa-user"></i> UserName
+                        <i class="fa fa-user"></i> {{ 'UserName' | translate }}
                     </a>
                     <div class="dropdown-menu-right" ngbDropdownMenu>
-                        <a class="dropdown-item" href="javascript:void(0)">
-                            <i class="fa fa-fw fa-user"></i> Profile
+                        <a class="dropdown-item" [routerLink]="['/profile']">
+                            <i class="fa fa-user"></i> {{'Profile' | translate}}
                         </a>
                         <a class="dropdown-item" href="javascript:void(0)">
-                            <i class="fas fa-cogs"></i> Settings
+                            <i class="fas fa-cogs"></i> {{ 'Settings' | translate }}
                         </a>
                         <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">
-                            <i class="fa fa-fw fa-power-off"></i> Log Out
+                            <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
                         </a>
                     </div>
                 </li>
