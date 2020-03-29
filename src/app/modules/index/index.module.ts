@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 import { ChartsModule as Ng2Charts } from 'ng2-charts';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './home.component';
+import { IndexRoutingModule } from './index-routing.module';
+import { IndexComponent } from './index.component';
 
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [IndexComponent],
   imports: [
     CommonModule,
-    HomeRoutingModule,
+    IndexRoutingModule,
     Ng2Charts,
     TranslateModule
   ]
 })
-export class HomeModule { }
+export class IndexModule { }

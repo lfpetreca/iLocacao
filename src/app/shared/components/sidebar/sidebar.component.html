@@ -1,25 +1,24 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
     <div class="list-group">
-        <a routerLink="/home" [routerLinkActive]="['active']" class="list-group-item">
-            <!-- <i class="fas fa-home"></i> -->
+        <a routerLink="/index" [routerLinkActive]="['active']" class="list-group-item">
             <i class="fas fa-folder-open"></i>
-            <span>{{ 'Home' | translate }}</span>
+            <span>{{ 'Index' | translate }}</span>
+        </a>
+        <a routerLink="/properties" [routerLinkActive]="['active']" class="list-group-item">
+            <i class="fas fa-home"></i>
+            <span>{{ 'Properties' | translate }}</span>
         </a>
         <a [routerLink]="['/lessees']" [routerLinkActive]="['active']" class="list-group-item">
-            <i class="fas fa-id-card"></i>
+            <i class="fas fa-house-user"></i>
             <span>{{ 'Lessees' | translate }}</span>
         </a>
         <a [routerLink]="['/renters']" [routerLinkActive]="['active']" class="list-group-item">
-            <i class="fas fa-id-badge"></i>
+            <i class="fas fa-id-card"></i>
             <span>{{ 'Renters' | translate }}</span>
         </a>
-        <a [routerLink]="['/profile']" [routerLinkActive]="['active']" class="list-group-item">
-            <i class="fa fa-user"></i> 
-            <span>{{'Profile' | translate}}</span>
-        </a>
-        <a href="javascript:void(0)" class="list-group-item">
-            <i class="fas fa-cogs"></i>
-            <span>{{ 'Settings' | translate }}</span>
+        <a [routerLink]="['/account']" [routerLinkActive]="['active']" class="list-group-item">
+            <i class="fa fa-user"></i>
+            <span>{{ 'Account' | translate}}</span>
         </a>
         <a [routerLink]="['/login']" (click)="onLoggedout()" class="list-group-item">
             <i class="fa fa-fw fa-power-off"></i>

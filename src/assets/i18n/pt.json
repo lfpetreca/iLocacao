@@ -2,7 +2,7 @@
     "Language": "PT",
     "English": "Inglês",
     "Settings": "Configurações",
-    "Profile": "Perfil",
+    "Account": "Sua Conta",
     "Log Out" : "Sair",
     "Full Name": "Nome completo",
     "Email": "Email",
@@ -10,13 +10,14 @@
     "Repeat Password": "Repetir a senha",
     "Register": "Registrar",
     "Log in": "Entrar",
-    "Home": "Inicio",
+    "Index": "Início",
     "Lessees": "Locatários",
     "Renters": "Locadores",
     "Collapse Sidebar": "Recolher Menu Lateral",
     "Reset": "Resetar",
     "Update": "Atualizar",
-    "Home Description": "Principais Dados Gráficos",
+    "Index Description": "Principais Dados Gráficos",
     "Bar Chart": "Gráfico de Barras",
-    "Doughnut Chart": "Gráfico de Rosca" 
+    "Doughnut Chart": "Gráfico de Rosca",
+    "Properties": "Imóveis" 
 }
