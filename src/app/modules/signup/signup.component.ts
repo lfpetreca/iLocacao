@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -7,9 +8,50 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  signUpForm: FormGroup;
+  submitted: boolean = false;
+  processing: boolean;
+  errors: string[];
 
-  ngOnInit() { }
+  isValid: boolean = false;
+  message: boolean = false;
+
+
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
+    this.signUpForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'), Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'), Validators.minLength(8)]], //this.passwordMatcher.bind(this)]],
+      agree: [false, [Validators.requiredTrue]]
+    })
+  }
+
+  ngOnInit(): void {
+  }
+
+  get f() { return this.signUpForm.controls; }
+
+  signUpFormOnSubmit() {
+    this.errors = null;
+    this.submitted = true;
+    this.processing = true;
+    this.message = false;
+
+    if (this.signUpForm.invalid) {
+      this.processing = false;
+      return;
+    }
+
+    //Pass the service here
+
+    //Then 
+    this.message = true;
+    this.processing = false;
+    this.isValid = true;
+  }
 
   onRegister() {
     localStorage.setItem('isLoggedin', 'true');

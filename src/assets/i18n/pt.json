@@ -1,6 +1,7 @@
 {
     "Language": "PT",
     "English": "Inglês",
+    "SignUp Title": "Crie sua conta aqui",
     "Settings": "Configurações",
     "Account": "Sua Conta",
     "Log Out" : "Sair",
@@ -11,7 +12,7 @@
     "Register": "Registrar",
     "Log in": "Entrar",
     "Index": "Início",
-    "Lessees": "Locatários",
+    "Lessees": "Inquilinos",
     "Renters": "Locadores",
     "Collapse Sidebar": "Recolher Menu Lateral",
     "Reset": "Resetar",
