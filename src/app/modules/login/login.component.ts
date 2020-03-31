@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-login',
@@ -7,12 +10,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginForm: FormGroup;
+  submitted: boolean = false;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    })
+  }
 
   ngOnInit() { }
 
-  onLoggedin() {
+  get f() { return this.loginForm.controls }
+
+  loginFormOnSubmit() {
+    this.submitted = true;
+
+    if (this.loginForm.invalid) { return; }
+
+    //Pass the service here
+
+    //Then 
     localStorage.setItem('isLoggedin', 'true');
+    this.router.navigate(['/index']);
   }
 
 }

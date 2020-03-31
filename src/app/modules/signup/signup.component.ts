@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -18,7 +19,8 @@ export class SignupComponent implements OnInit {
 
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.signUpForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -48,13 +50,7 @@ export class SignupComponent implements OnInit {
     //Pass the service here
 
     //Then 
-    this.message = true;
-    this.processing = false;
-    this.isValid = true;
-  }
-
-  onRegister() {
-    localStorage.setItem('isLoggedin', 'true');
+    this.router.navigate(['/login']);
   }
 
 }

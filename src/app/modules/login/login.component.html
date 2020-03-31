@@ -13,18 +13,34 @@
                     <div class="login__box_form col-12">
                         <div class="row pt-4">
                             <div class="col-12">
-                                <h6>Login here:</h6>
+                                <h6>{{ 'Login Title' | translate }}</h6>
                             </div>
 
-                            <form class="col-12" role="form">
+                            <form class="col-12" [formGroup]="loginForm" (ngSubmit)="loginFormOnSubmit()">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address:</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp" placeholder="Enter email">                                   
+                                    <label for="email">{{ 'Email' | translate }}:</label>
+                                    <input type="email" class="form-control" id="email" formControlName="email"
+                                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                                        placeholder="{{ 'Email' | translate }}">
+                              
+                                    <div *ngIf="f.email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.email.errors.required">
+                                            <span>Insira um email válido</span>
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password:</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <label for="password">{{ 'Password' | translate }}:</label>
+                                    <input type="password" class="form-control" id="password" formControlName="password"
+                                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                                        placeholder="{{ 'Password' | translate }}">
+
+                                    <div *ngIf="f.password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.password.errors.required">
+                                            <span>Insira uma senha</span>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="row pt-4">
@@ -33,9 +49,10 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <a class="btn btn-primary w-100" [routerLink]="['/index']"
-                                            (click)="onLoggedin()">Submit</a>
+                                        <button class="btn btn-primary w-100"
+                                            type="submit">Loggin</button>
                                     </div>
+
                                 </div>
                             </form>
 
