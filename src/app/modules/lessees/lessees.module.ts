@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { LesseesRoutingModule } from './lessees-routing.module';
-import { LesseesComponent } from '../lessees/lessees.component';
+import { LesseesComponent } from './components/lessees/lessees.component';
+import { NewLesseesComponent } from './components/new-lessees/new-lessees.component';
 
 
 @NgModule({
-  declarations: [LesseesComponent],
+  declarations: [LesseesComponent, NewLesseesComponent],
   imports: [
     CommonModule,
     LesseesRoutingModule,

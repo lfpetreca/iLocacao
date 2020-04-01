@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { RentersComponent } from './renters.component';
+import { RentersComponent } from './components/renters/renters.component';
 
 
 const routes: Routes = [{
