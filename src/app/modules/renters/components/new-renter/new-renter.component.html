@@ -1,6 +1,6 @@
 <div class="newRenter row">
     <div class="col-12 pt-3">
-        <h5 class="mb-3">Adicionar novo locador</h5>
+        <p>Formulário para incrição de novos locatários</p>
     </div>
 
     <form class="newRenter__form col-12" [formGroup]="newRenterForm" (ngSubmit)="newRenterFormOnSubmit()">
@@ -55,7 +55,7 @@
                             placeholder="Endereço">
 
                         <div *ngIf=" addressForm.get('address')?.invalid" class="invalid-feedback">
-                            <span>Insira o endereço Locatário</span>
+                            <span>Insira o endereço do Locatário</span>
                         </div>
                     </div>
                     <div class="form-group col-4">
@@ -133,25 +133,22 @@
                                     Fixo</label>
                                 </div>
                             </div>
-                            <!-- <div class="col-3">
-                                <a class="btn btn-success" (click)="addContact()">
-                                    <i class="fas fa-plus-circle"></i></a>
+                                <!-- <div class="col-3">
+                                    <a class="btn btn-success" (click)="addContact()">
+                                        <i class="fas fa-plus-circle"></i></a>
 
-                                <a class="btn btn-danger" (click)="removeContact()">
-                                    <i class="fas fa-minus-circle"></i></a>
+                                    <a class="btn btn-danger" (click)="removeContact()">
+                                        <i class="fas fa-minus-circle"></i></a>
 
-                            </div> -->
+                                </div> -->
                         </div>
-
-
                     </div>
                 </div>
-
             </div>
         </div>
-        <div class="row py-4 justify-content-end">
+        <div class="row pt-3 justify-content-end">
             <div class="pr-3">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;ADICIONAR LOCADOR</button>
+                <button class="btn btn-primary" type="submit"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;ADICIONAR LOCATÁRIO</button>
             </div>
         </div>
     </form>

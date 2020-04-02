@@ -4,6 +4,15 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Franklin Gothic Medium', Arial, sans-serif; }
 
+.renters, .lessees { 
+    .nav-link { color: $mainBg;
+        &.active { color: $primary; font-weight: bold; background-color: $lightBg; border-bottom-color: transparent; }
+        &:hover{ color: $primary;}
+    }
+
+    tbody th { font-weight: 300; color: $text; }
+}
+
 @media screen and (max-width: 992px) {
     .push-right {
         .sidebar { left: 235px !important;  }

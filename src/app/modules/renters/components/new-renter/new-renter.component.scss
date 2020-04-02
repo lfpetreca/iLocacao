@@ -1,11 +1,13 @@
 @import '../../../../../assets/scss/variables';
 
-.newRenter{ background-color: $lightBg; margin: 20px; border: 1px solid #efeff5; border-radius: 5px;
+.newRenter{
     h5 { font-size: 1.3rem; font-weight: bold; color: $mainBg; }
     &__form{
-        &_subSection{ 
+        &_subSection{
             h6 { @extend h5; font-size: 1rem!important; }
             label { margin-bottom: 0; }
         }
+
+        .form-group { margin-bottom: 5px;}
     }
 }

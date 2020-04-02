@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 /* import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth"; */
 
@@ -28,8 +29,9 @@ import { AuthGuard } from './shared/guard/auth.guard';
     HttpClientModule,
     LanguageTranslationModule,
     NgxMaskModule.forRoot(),
-   /*  AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule */
+    NgbModule,
+    /*  AngularFireModule.initializeApp(environment.firebase),
+     AngularFireAuthModule */
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

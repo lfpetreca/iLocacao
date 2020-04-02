@@ -12,40 +12,22 @@ export class IndexComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  public barChartLabels: string[] = [
-    '2014',
-    '2015',
-    '2016',
-    '2017',
-    '2018',
-    '2019',
-    '2020'
-  ];
+  //Deixar dinamico
+  public barChartLabels: string[] = ['dez-2019', 'jan-2020', 'fev-2020', 'mar-2020', 'abr-2020', 'mai-2020', 'jun-2020'];
   public barChartType: string;
   public barChartLegend: boolean;
 
   public barChartData: any[] = [
+    //Deixar dinamico
     { data: [6500, 5900, 8000, 8100, 5600, 5500, 4000], label: 'Imoveis Disponíveis' },
     { data: [2800, 4800, 4000, 1900, 8600, 2700, 9000], label: 'Alugados' }
   ];
 
   // Doughnut
-  public doughnutChartLabels: string[] = [
-    'Disponíveis',
-    'Alugados',
-    'Aguadando Documentação'
-  ];
+  //Deixar dinamico
+  public doughnutChartLabels: string[] = ['Disponíveis', 'Alugados', 'Aguadando Documentação'];
   public doughnutChartData: number[] = [3500, 4500, 1000];
   public doughnutChartType: string;
-
-  // events
-  public chartClicked(e: any): void {
-    // console.log(e);
-  }
-
-  public chartHovered(e: any): void {
-    // console.log(e);
-  }
 
   constructor() { }
 

@@ -9,8 +9,7 @@
                     <div class="card-header">{{ 'Bar Chart' | translate }}</div>
                     <div class="card-body">
                         <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
-                            [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"
-                            (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                            [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
                         </canvas>
                     </div>
                 </div>
@@ -20,8 +19,7 @@
                     <div class="card-header">{{ 'Doughnut Chart' | translate }}</div>
                     <div class="card-body">
                         <canvas baseChart height="180px" [data]="doughnutChartData" [labels]="doughnutChartLabels"
-                            [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"
-                            (chartClick)="chartClicked($event)">
+                            [chartType]="doughnutChartType">
                         </canvas>
                     </div>
                 </div>
