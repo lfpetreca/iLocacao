@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
+import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 /* import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth"; */
@@ -15,6 +16,15 @@ import { LayoutModule } from './layout/layout.module';
 import { LanguageTranslationModule } from './shared/modules/language-translation/language-translation.module'
 import { AuthGuard } from './shared/guard/auth.guard';
 
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+  align: "left",
+  allowNegative: true,
+  decimal: ",",
+  precision: 2,
+  prefix: "R$ ",
+  suffix: "",
+  thousands: "."
+};
 
 @NgModule({
   declarations: [
@@ -29,11 +39,15 @@ import { AuthGuard } from './shared/guard/auth.guard';
     HttpClientModule,
     LanguageTranslationModule,
     NgxMaskModule.forRoot(),
+    CurrencyMaskModule,
     NgbModule,
     /*  AngularFireModule.initializeApp(environment.firebase),
      AngularFireAuthModule */
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

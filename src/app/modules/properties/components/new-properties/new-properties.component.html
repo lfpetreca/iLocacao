@@ -1,1 +1,158 @@
-<p>new-properties works!</p>
+<div class="newPropertie row">
+    <div class="col-12 pt-3">
+        <p>Formulário para novo imóvel</p>
+    </div>
+
+    <form class="newPropertie__form col-12" [formGroup]="newPropertieForm" (ngSubmit)="newPropertieFormOnSubmit()">
+        <div class="row">
+            <div class="newPropertie__form_subSection col-md-6 pt-2">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="propertie" value="apartment">
+                                Apartamento
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="propertie" value="house">
+                                Casa
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="propertie" value="commercial">
+                                Comercial
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="rent">Valor do alugel</label>
+                            <input type="text" class="form-control" id="rent" formControlName="rent" currencyMask
+                                placeholder="R$ 000,00">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="iptu">Valor do IPTU</label>
+                            <input type="text" class="form-control" id="iptu" formControlName="iptu" currencyMask
+                                placeholder="R$ 000,00">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="condominium">Valor do Condomínio</label>
+                            <input type="text" class="form-control" id="condominium" formControlName="condominium"
+                                currencyMask placeholder="R$ 000,00">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reference">Referência</label>
+                    <input type="text" class="form-control" id="reference" formControlName="reference">
+                </div>
+
+                <div class="form-group">
+                    <label for="lessee">Propietário</label>
+                    <input type="text" class="form-control" id="lessee" formControlName="lessee">
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="status" value="available">
+                                Disponível
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="status" value="
+                                unavailable">
+                                Alugado
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div formGroupName="addressForm" class="newPropertie__form_subSection col-md-6 pt-2">
+                <h6 class="mb-3">Endereço</h6>
+                <div class="row">
+                    <div class="form-group col-8">
+                        <label for="address">Endereço</label>
+                        <input type="text" class="form-control" id="address" formControlName="address"
+                            [ngClass]="{ 'is-invalid': submitted && addressForm.get('address')?.errors }"
+                            placeholder="Endereço">
+
+                        <div *ngIf=" addressForm.get('address')?.invalid" class="invalid-feedback">
+                            <span>Insira o endereço do Inquilino</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="number">Numero</label>
+                        <input type="text" class="form-control" id="number" formControlName="number"
+                            [ngClass]="{ 'is-invalid': submitted && addressForm.get('number')?.errors }"
+                            placeholder="Numero" mask="0000000">
+
+                        <div *ngIf="addressForm.get('number')?.invalid" class="invalid-feedback">
+                            <span>Insira o número</span>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-8">
+                        <label for="neighborhood">Bairro *</label>
+                        <input type="text" class="form-control" id="neighborhood" formControlName="neighborhood"
+                            placeholder="Endereço">
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="zipCode">CEP *</label>
+                        <input type="text" class="form-control" id="zipCode" formControlName="zipCode" placeholder="CEP"
+                            mask="00000-000">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">Cidade</label>
+                    <input type="text" class="form-control" id="city" formControlName="city"
+                        [ngClass]="{ 'is-invalid': submitted && addressForm.get('city')?.errors }" placeholder="Cidade">
+
+
+                    <div *ngIf="addressForm.get('city')?.invalid" class="invalid-feedback">
+                        <span>Insira o Cidade</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="uf">Estado {{ estados | json }}</label>
+                    <select class="form-control" id="uf" formControlName="uf"
+                        [ngClass]="{ 'is-invalid': submitted && addressForm.get('uf')?.errors }">
+                        <option value="" disabled selected>Selecione o Estado</option>
+                        
+                        <option *ngFor="let estado of estados" [value]="estado.uf">{{ estado.name }}</option>
+                    </select>
+                    <div *ngIf="addressForm.get('uf')?.invalid" class="invalid-feedback">
+                        <span>Selecione o estado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-3 justify-content-end">
+            <div class="pr-3">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i>&nbsp;&nbsp;ADICIONAR
+                    IMÓVEL</button>
+            </div>
+        </div>
+    </form>
+</div>

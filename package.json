@@ -33,6 +33,7 @@
     "core-js": "3.6.4",
     "firebase": "^7.12.0",
     "ng2-charts": "^2.3.0",
+    "ng2-currency-mask": "^9.0.2",
     "ngx-auth-firebaseui": "^4.0.1",
     "ngx-mask": "^8.2.0",
     "rxjs": "~6.5.4",

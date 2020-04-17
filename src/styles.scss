@@ -4,7 +4,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Franklin Gothic Medium', Arial, sans-serif; }
 
-.renters, .lessees { 
+.properties, .renters, .lessees { 
     .nav-link { color: $mainBg;
         &.active { color: $primary; font-weight: bold; background-color: $lightBg; border-bottom-color: transparent; }
         &:hover{ color: $primary;}

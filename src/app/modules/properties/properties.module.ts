@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { PropertiesRoutingModule } from './properties-routing.module';
@@ -25,6 +26,7 @@ import { PropertiesListComponent } from './components/properties-list/properties
     TranslateModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
+    CurrencyMaskModule,
     NgbModule
   ]
 })
