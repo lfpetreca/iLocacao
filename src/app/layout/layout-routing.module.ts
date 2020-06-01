@@ -11,8 +11,7 @@ const routes: Routes = [{
     { path: 'index', loadChildren: () => import('../modules/index/index.module').then(m => m.IndexModule) },
     { path: 'properties', loadChildren: () => import('../modules/properties/properties.module').then(m => m.PropertiesModule) },
     { path: 'lessees', loadChildren: () => import('../modules/lessees/lessees.module').then(m => m.LesseesModule) },
-    { path: 'renters', loadChildren: () => import('../modules/renters/renters.module').then(m => m.RentersModule) },
-    { path: 'account', loadChildren: () => import('../modules/account/account.module').then(m => m.AccountModule) }
+    { path: 'renters', loadChildren: () => import('../modules/renters/renters.module').then(m => m.RentersModule) } 
   ]
 }];
 

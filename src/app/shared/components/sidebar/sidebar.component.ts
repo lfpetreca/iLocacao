@@ -1,6 +1,9 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Location } from '@angular/common';
+
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +18,12 @@ export class SidebarComponent implements OnInit {
 
   @Output() collapsedEvent = new EventEmitter<boolean>();
 
-  constructor(private translate: TranslateService, public router: Router) {
+  constructor(
+    public auth: AuthService,
+    private translate: TranslateService, 
+    private location : Location,
+    public router: Router
+    ) {
     this.router.events.subscribe(val => {
       if (
         val instanceof NavigationEnd &&
@@ -62,13 +70,17 @@ export class SidebarComponent implements OnInit {
     dom.classList.toggle(this.pushRightClass);
   }
 
-
-
   changeLang(language: string) {
     this.translate.use(language);
   }
 
-  onLoggedout() {
-    localStorage.removeItem('isLoggedin');
+  onLoggedout(){
+    this.auth.doLogout();
+    this.auth.doLogout()
+    .then((res) => {
+      this.location.back();
+    }, (error) => {
+      console.log("Logout error", error);
+    });
   }
 }

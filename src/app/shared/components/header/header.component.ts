@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Location } from '@angular/common';
+
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +14,8 @@ export class HeaderComponent implements OnInit {
   public pushRightClass: string;
 
   constructor(
+    public auth: AuthService,
+    private location : Location,
     private translate: TranslateService,
     public router: Router
   ) {
@@ -40,7 +45,12 @@ export class HeaderComponent implements OnInit {
   }
 
   onLoggedout() {
-    localStorage.removeItem('isLoggedin');
+    this.auth.doLogout()
+      .then((res) => {
+        this.router.navigate(['/login']);
+      }, (error) => {
+        console.log("Logout error", error);
+      });
   }
 
   changeLang(language: string) {

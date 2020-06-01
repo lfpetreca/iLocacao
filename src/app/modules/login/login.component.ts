@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { AuthService } from '../../services/auth/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    public auth: AuthService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -27,16 +30,20 @@ export class LoginComponent implements OnInit {
 
   get f() { return this.loginForm.controls }
 
-  loginFormOnSubmit() {
+  async loginFormOnSubmit() {
     this.submitted = true;
 
     if (this.loginForm.invalid) { return; }
-
+    console.log(this.loginForm.value)
     //Pass the service here
+    await this.auth.doLogin(this.loginForm.value)
+      .then(res => {
+        this.router.navigate(['/index']);
+      }, err => {
+        console.log(err);
+        //this.errorMessage = err.message;
+      })
 
-    //Then 
-    localStorage.setItem('isLoggedin', 'true');
-    this.router.navigate(['/index']);
   }
 
 }

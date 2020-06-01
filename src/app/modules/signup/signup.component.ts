@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { AuthService } from '../../services/auth/auth.service';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -20,7 +22,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    public auth: AuthService,
   ) {
     this.signUpForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -36,21 +39,21 @@ export class SignupComponent implements OnInit {
 
   get f() { return this.signUpForm.controls; }
 
-  signUpFormOnSubmit() {
+  async signUpFormOnSubmit() {
     this.errors = null;
     this.submitted = true;
     this.processing = true;
     this.message = false;
 
-    if (this.signUpForm.invalid) {
-      this.processing = false;
-      return;
-    }
+    if (this.signUpForm.invalid) { return; }
 
-    //Pass the service here
-
-    //Then 
-    this.router.navigate(['/login']);
+    await this.auth.doRegister(this.f.value)
+      .then(res => {
+        console.log(res);
+        this.router.navigate(['/login']);
+      }, err => {
+        console.log(err);
+      })
   }
 
 }
