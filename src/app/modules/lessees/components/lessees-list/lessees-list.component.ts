@@ -1,16 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LesseeService } from '../../../../services/lessee/lessee.service';
+
 @Component({
   selector: 'app-lessees-list',
   templateUrl: './lessees-list.component.html',
   styleUrls: ['./lessees-list.component.scss']
 })
 export class LesseesListComponent implements OnInit {
-  lessees: any[];
-  constructor() { }
+  lessees: any;
+  constructor(
+    private lesseeService: LesseeService
+  ) { }
 
-  ngOnInit(): void {
-    this.lessees = mockUsers;
+  ngOnInit() {
+    this.getLessees()
+  }
+
+
+  getLessees() {
+    this.lesseeService.getAllLessees()
+      .subscribe(res => {
+        this.lessees = res
+        console.log(res)
+      })
   }
 
 }
