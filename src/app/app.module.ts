@@ -7,8 +7,9 @@ import { NgxMaskModule } from 'ngx-mask';
 import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from "@angular/fire";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFireAuthModule } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -45,11 +46,11 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CurrencyMaskModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,  // imports firebase/firestore, only needed for database features
-    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [
-    AngularFirestore,
     AuthService,
     AuthGuard,
     UserService,

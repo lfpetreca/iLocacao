@@ -5,12 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyDH2FOKssjtZKySYvC4wQLyFvxLrPxRErg",
-    authDomain: "ilocacao-413ca.firebaseapp.com",
-    databaseURL: "https://ilocacao-413ca.firebaseio.com",
-    projectId: "ilocacao-413ca",
-    storageBucket: "ilocacao-413ca.appspot.com",
-    messagingSenderId: "805633499949",
+      apiKey: "AIzaSyCEnmknJ4I_Up3E8gBSajvNX0tOBSmKbGc",
+      authDomain: "ilocacao-d78b7.firebaseapp.com",
+      databaseURL: "https://ilocacao-d78b7.firebaseio.com",
+      projectId: "ilocacao-d78b7",
+      storageBucket: "ilocacao-d78b7.appspot.com",
+      messagingSenderId: "63295169862",
+      appId: "1:63295169862:web:ff91e14f5e537bcea27147",
+      measurementId: "G-ESDQTYR7KW"
   },
   apiUrl: 'http://localhost:3000'
 };

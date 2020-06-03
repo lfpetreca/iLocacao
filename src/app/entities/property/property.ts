@@ -1,4 +1,3 @@
-
 export interface Property {
     reference: string; //Nome de referencia do imovel  
     renter: string;  //Propietário
@@ -7,13 +6,12 @@ export interface Property {
     iptu: number; //Valor IPTU   - not required
     condominium: number;  //Valor condominio - not required
     status: string; //Statudo o imovel ("indisponivel", "disponivel"), 
-    addressForm: {
-        address: string;   //Endereco   
+    address: {
+        street: string;   //Endereco   
         number: string;   // Numero
         neighborhood: string;     // bairro
         zipCode: string;   //CEP
         city: string;  //Cidade
         uf: string;  //Estado
-    },
-
+    }
 }
