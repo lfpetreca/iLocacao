@@ -11,7 +11,6 @@ import { NewLesseesComponent } from './components/new-lessees/new-lessees.compon
 import { LesseesListComponent } from './components/lessees-list/lessees-list.component';
 import { LesseesDetailsComponent } from './components/lessees-details/lessees-details.component';
 
-import { LesseeService } from '../../services/lessee/lessee.service';
 
 @NgModule({
   declarations: [
@@ -28,8 +27,6 @@ import { LesseeService } from '../../services/lessee/lessee.service';
     NgxMaskModule,
     NgbModule
   ], 
-  providers: [
-    LesseeService
-  ]
+  providers: [ ]
 })
 export class LesseesModule { }
