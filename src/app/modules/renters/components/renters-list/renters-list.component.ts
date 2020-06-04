@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
+import { RenterService } from '../../../../services/renter/renter.service';
 
 @Component({
   selector: 'app-renters-list',
@@ -8,22 +8,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./renters-list.component.scss']
 })
 export class RentersListComponent implements OnInit {
-  renters: any[];
+  renters: any;
 
-  constructor(private router: Router) { }
+  constructor(
+    private renterService: RenterService
+    ) { }
 
-  ngOnInit(): void {
-    this.renters = mockUsers;
+  ngOnInit() {
+    this.getRenters()
   }
 
-}
+  getRenters() {
+    this.renterService.getAllRenters()
+      .subscribe(res => {
+        this.renters = res
+      })
+  }
 
-const mockUsers = [
-  { id: "493", name: "David Hume", email: "hume_1748@email.com", phone: "11 95534-0000" },
-  { id: "653", name: "John Stuart Mill", email: "mill_1861@email.com", phone: "11 5674-8943" },
-  { id: "93", name: "Francis Bacon", email: "bacon_1620@email.com", phone: "11 6434-8902" },
-  { id: "543", name: "Immanuel Kant", email: "kant_1781@email.com", phone: "11 1244-0753" },
-  { id: "19", name: "Edmund Husserl", email: "husserl_1900@email.com", phone: "11 2075-1902" },
-  { id: "70", name: "René Descartes", email: "descartes_1637@email.com", phone: "11 81637-7320" },
-  { id: "114", name: "Gilles Deleuze", email: "deleuze_1980@email.com", phone: "11 98734-5461" },
-]
+  deleteRenter = renter => this.renterService.deleteRenter(renter);
+
+}

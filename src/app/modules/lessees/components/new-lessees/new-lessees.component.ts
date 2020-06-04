@@ -60,13 +60,9 @@ export class NewLesseesComponent implements OnInit {
     })
   }
 
-  /* addContact() {
-    this.contactForm.push(this.createContact());
-  } */
-
   newLesseeFormOnSubmit() {
     this.submitted = true;
-    //console.log(this.newLesseeForm.value)
+ 
     if (this.newLesseeForm.invalid) { return; }
 
     //Set Object Values
@@ -88,6 +84,13 @@ export class NewLesseesComponent implements OnInit {
         console.error(error)
       })
     //Then 
+
+    this.newLesseeForm.reset()
+    this.message = 'Inquilino criado com sucesso'
+  }
+
+  resetMessage() {
+    this.message = null
   }
 
 }

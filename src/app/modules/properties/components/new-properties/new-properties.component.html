@@ -1,11 +1,18 @@
 <div class="newPropertie row">
     <div class="col-12 pt-3">
+        <div *ngIf="message" class="alert alert-success alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="resetMessage()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <p>Formulário para novo imóvel</p>
     </div>
 
     <form class="newPropertie__form col-12" [formGroup]="newPropertieForm" (ngSubmit)="newPropertieFormOnSubmit()">
         <div class="row">
             <div class="newPropertie__form_subSection col-md-6 pt-2">
+                <h6 class="mb-3">Dados do Imóvel</h6>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-check form-check-inline">
@@ -34,7 +41,11 @@
                         <div class="form-group">
                             <label for="rent">Valor do alugel</label>
                             <input type="text" class="form-control" id="rent" formControlName="rent" currencyMask
-                                placeholder="R$ 000,00">
+                                [ngClass]="{ 'is-invalid': submitted && f['rent']?.errors }" placeholder="R$ 000,00">
+
+                            <div *ngIf="f['rent']?.invalid" class="invalid-feedback">
+                                <span>Insira o valor do alugel</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -44,7 +55,11 @@
                         <div class="form-group">
                             <label for="iptu">Valor do IPTU</label>
                             <input type="text" class="form-control" id="iptu" formControlName="iptu" currencyMask
-                                placeholder="R$ 000,00">
+                                [ngClass]="{ 'is-invalid': submitted && f['iptu']?.errors }" placeholder="R$ 000,00">
+
+                            <div *ngIf="f['iptu']?.invalid" class="invalid-feedback">
+                                <span>Insira o valor do IPTU</span>
+                            </div>
                         </div>
                     </div>
 
@@ -52,19 +67,37 @@
                         <div class="form-group">
                             <label for="condominium">Valor do Condomínio</label>
                             <input type="text" class="form-control" id="condominium" formControlName="condominium"
-                                currencyMask placeholder="R$ 000,00">
+                                [ngClass]="{ 'is-invalid': submitted && f['condominium']?.errors }" currencyMask
+                                placeholder="R$ 000,00">
+
+                            <div *ngIf="f['condominium']?.invalid" class="invalid-feedback">
+                                <span>Insira o valor do Condomínio</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="reference">Referência</label>
-                    <input type="text" class="form-control" id="reference" formControlName="reference">
+                    <input type="text" class="form-control" id="reference" formControlName="reference"
+                        [ngClass]="{ 'is-invalid': submitted && f['reference']?.errors }"
+                        placeholder="Insira o Referência para o imóvel">
+
+                    <div *ngIf="f['reference']?.invalid" class="invalid-feedback">
+                        <span>Insira um nome de Referência para o imóvel</span>
+                    </div>
+
                 </div>
 
                 <div class="form-group">
-                    <label for="lessee">Propietário</label>
-                    <input type="text" class="form-control" id="lessee" formControlName="lessee">
+                    <label for="renter">Propietário *</label>
+                    <input type="text" class="form-control" id="renter" formControlName="renter"
+                        [ngClass]="{ 'is-invalid': submitted && f['renter']?.errors }"
+                        placeholder="Insira o Propietário">
+
+                    <div *ngIf="f['renter']?.invalid" class="invalid-feedback">
+                        <span>Insira o nome do Proprietário do imóvel</span>
+                    </div>
                 </div>
 
                 <div class="row">
@@ -86,26 +119,26 @@
                 </div>
             </div>
 
-            <div formGroupName="addressForm" class="newPropertie__form_subSection col-md-6 pt-2">
+            <div formGroupName="address" class="newPropertie__form_subSection col-md-6 pt-2">
                 <h6 class="mb-3">Endereço</h6>
                 <div class="row">
                     <div class="form-group col-8">
-                        <label for="address">Endereço</label>
-                        <input type="text" class="form-control" id="address" formControlName="address"
-                            [ngClass]="{ 'is-invalid': submitted && addressForm.get('address')?.errors }"
+                        <label for="street">Endereço</label>
+                        <input type="text" class="form-control" id="street" formControlName="street"
+                            [ngClass]="{ 'is-invalid': submitted && address.get('street')?.errors }"
                             placeholder="Endereço">
 
-                        <div *ngIf=" addressForm.get('address')?.invalid" class="invalid-feedback">
+                        <div *ngIf=" address.get('street')?.invalid" class="invalid-feedback">
                             <span>Insira o endereço do Inquilino</span>
                         </div>
                     </div>
                     <div class="form-group col-4">
                         <label for="number">Numero</label>
-                        <input type="text" class="form-control" id="number" formControlName="number"
-                            [ngClass]="{ 'is-invalid': submitted && addressForm.get('number')?.errors }"
-                            placeholder="Numero" mask="0000000">
+                        <input type="number" class="form-control" id="number" formControlName="number"
+                            [ngClass]="{ 'is-invalid': submitted && address.get('number')?.errors }"
+                            placeholder="Numero">
 
-                        <div *ngIf="addressForm.get('number')?.invalid" class="invalid-feedback">
+                        <div *ngIf="address.get('number')?.invalid" class="invalid-feedback">
                             <span>Insira o número</span>
                         </div>
 
@@ -125,10 +158,10 @@
                 <div class="form-group">
                     <label for="city">Cidade</label>
                     <input type="text" class="form-control" id="city" formControlName="city"
-                        [ngClass]="{ 'is-invalid': submitted && addressForm.get('city')?.errors }" placeholder="Cidade">
+                        [ngClass]="{ 'is-invalid': submitted && address.get('city')?.errors }" placeholder="Cidade">
 
 
-                    <div *ngIf="addressForm.get('city')?.invalid" class="invalid-feedback">
+                    <div *ngIf="address.get('city')?.invalid" class="invalid-feedback">
                         <span>Insira o Cidade</span>
                     </div>
                 </div>
@@ -136,12 +169,12 @@
                 <div class="form-group">
                     <label for="uf">Estado</label>
                     <select class="form-control" id="uf" formControlName="uf"
-                        [ngClass]="{ 'is-invalid': submitted && addressForm.get('uf')?.errors }">
+                        [ngClass]="{ 'is-invalid': submitted && address.get('uf')?.errors }">
                         <option value="" disabled selected>Selecione o Estado</option>
-                        
+
                         <option *ngFor="let estado of estados" [value]="estado.uf">{{ estado.name }}</option>
                     </select>
-                    <div *ngIf="addressForm.get('uf')?.invalid" class="invalid-feedback">
+                    <div *ngIf="address.get('uf')?.invalid" class="invalid-feedback">
                         <span>Selecione o estado</span>
                     </div>
                 </div>

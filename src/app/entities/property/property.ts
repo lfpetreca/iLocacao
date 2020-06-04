@@ -1,10 +1,10 @@
-export interface Property {
+export class Property {
     reference: string; //Nome de referencia do imovel  
     renter: string;  //Propietário
     propertie: string; // Tipo de imovel ("apartamento", "casa")
     rent: number;  //Valor do aluguel 
     iptu: number; //Valor IPTU   - not required
-    condominium: number;  //Valor condominio - not required
+    condominium: number;  //Valor condominio - not required 
     status: string; //Statudo o imovel ("indisponivel", "disponivel"), 
     address: {
         street: string;   //Endereco   

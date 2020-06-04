@@ -1,5 +1,11 @@
 <div class="newRenter row">
     <div class="col-12 pt-3">
+        <div *ngIf="message" class="alert alert-success alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="resetMessage()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <p>Formulário para incrição de novos locatários</p>
     </div>
 
@@ -14,7 +20,7 @@
                         placeholder="{{ 'Full Name' | translate }}">
 
                     <div *ngIf="f['name'].invalid" class="invalid-feedback">
-                        <span>Insira o nome do Locatário</span>
+                        <span>Insira o nome do Inquilino</span>
                     </div>
                 </div>
 
@@ -45,26 +51,26 @@
                     </div>
                 </div>
             </div>
-            <div formGroupName="addressForm" class=" newRenter__form_subSection col-md-6 pt-2">
+            <div formGroupName="address" class="newRenter__form_subSection col-md-6 pt-2">
                 <h6 class="mb-3">Endereço</h6>
                 <div class="row">
                     <div class="form-group col-8">
-                        <label for="address">Endereço</label>
-                        <input type="text" class="form-control" id="address" formControlName="address"
-                            [ngClass]="{ 'is-invalid': submitted && addressForm.get('address')?.errors }"
+                        <label for="street">Endereço</label>
+                        <input type="text" class="form-control" id="street" formControlName="street"
+                            [ngClass]="{ 'is-invalid': submitted && address.get('street')?.errors }"
                             placeholder="Endereço">
 
-                        <div *ngIf=" addressForm.get('address')?.invalid" class="invalid-feedback">
-                            <span>Insira o endereço do Locatário</span>
+                        <div *ngIf=" address.get('street')?.invalid" class="invalid-feedback">
+                            <span>Insira o endereço do Inquilino</span>
                         </div>
                     </div>
                     <div class="form-group col-4">
                         <label for="number">Numero</label>
-                        <input type="text" class="form-control" id="number" formControlName="number"
-                            [ngClass]="{ 'is-invalid': submitted && addressForm.get('number')?.errors }"
-                            placeholder="Numero" mask="0000000">
+                        <input type="number" class="form-control" id="number" formControlName="number"
+                            [ngClass]="{ 'is-invalid': submitted && address.get('number')?.errors }"
+                            placeholder="Numero">
 
-                        <div *ngIf="addressForm.get('number')?.invalid" class="invalid-feedback">
+                        <div *ngIf="address.get('number')?.invalid" class="invalid-feedback">
                             <span>Insira o número</span>
                         </div>
 
@@ -76,18 +82,18 @@
                     </div>
                     <div class="form-group col-4">
                         <label for="zipCode">CEP *</label>
-                        <input type="text" class="form-control" id="zipCode" formControlName="zipCode"
-                            placeholder="CEP" mask="00000-000">
+                        <input type="text" class="form-control" id="zipCode" formControlName="zipCode" placeholder="CEP"
+                            mask="00000-000">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="city">Cidade</label>
                     <input type="text" class="form-control" id="city" formControlName="city"
-                        [ngClass]="{ 'is-invalid': submitted && addressForm.get('city')?.errors }" placeholder="Cidade">
+                        [ngClass]="{ 'is-invalid': submitted && address.get('city')?.errors }" placeholder="Cidade">
 
 
-                    <div *ngIf="addressForm.get('city')?.invalid" class="invalid-feedback">
+                    <div *ngIf="address.get('city')?.invalid" class="invalid-feedback">
                         <span>Insira o Cidade</span>
                     </div>
                 </div>
@@ -95,28 +101,28 @@
                 <div class="form-group">
                     <label for="uf">Estado</label>
                     <select class="form-control" id="uf" formControlName="uf"
-                        [ngClass]="{ 'is-invalid': submitted && addressForm.get('uf')?.errors }">
+                        [ngClass]="{ 'is-invalid': submitted && address.get('uf')?.errors }">
                         <option value="" disabled selected>Selecione o Estado</option>
                         <option *ngFor="let estado of estados" [value]="estado.uf">{{ estado.name }}</option>
                     </select>
-                    <div *ngIf="addressForm.get('uf')?.invalid" class="invalid-feedback">
+                    <div *ngIf="address.get('uf')?.invalid" class="invalid-feedback">
                         <span>Selecione o estado</span>
                     </div>
                 </div>
 
             </div>
 
-            <div formArrayName="contacts" class="newRenter__form_subSection col-12 pt-2" >
+            <div formArrayName="contacts" class="newRenter__form_subSection col-12 pt-2">
                 <h6 class="mb-3">Contato</h6>
 
-                <div *ngFor="let contact of contactForm.controls; let i=index">
+                <div *ngFor="let contact of contacts.controls; let i=index">
                     <div [formGroupName]="i">
                         <div class="row">
                             <div class="form-group col-4">
                                 <input type="text" class="form-control" id="phone{{i}}" formControlName="phone"
-                                    [ngClass]="{ 'is-invalid': submitted && contactForm.controls[i].get('phone')?.errors }"
-                                    mask="(00) 0000-0000?0" placeholder="Telefone">
-                                <div *ngIf="contactForm.controls[i].get('phone')?.invalid" class="invalid-feedback">
+                                    [ngClass]="{ 'is-invalid': submitted && contacts.controls[i].get('phone')?.errors }"
+                                    mask="(00) 00000-0000" placeholder="Telefone">
+                                <div *ngIf="contacts.controls[i].get('phone')?.invalid" class="invalid-feedback">
                                     <span>Insira o telefone</span>
                                 </div>
                             </div>
@@ -133,7 +139,7 @@
                                     Fixo</label>
                                 </div>
                             </div>
-                                <!-- <div class="col-3">
+                            <!-- <div class="col-3">
                                     <a class="btn btn-success" (click)="addContact()">
                                         <i class="fas fa-plus-circle"></i></a>
 
@@ -148,7 +154,8 @@
         </div>
         <div class="row pt-3 justify-content-end">
             <div class="pr-3">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;ADICIONAR LOCATÁRIO</button>
+                <button class="btn btn-primary" type="submit"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;ADICIONAR
+                    LOCATÁRIO</button>
             </div>
         </div>
     </form>

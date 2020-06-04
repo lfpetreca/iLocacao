@@ -1,5 +1,191 @@
-<div class="row">
-    <div class="col-12">
-        <h4>Detalhes de Locatário</h4>
+<section class="renters">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Proprietário Detalhes</h2>
+            </div>
+            <main class="col-12">
+                <ngb-tabset [destroyOnHide]="false">
+                    <ngb-tab class="renters__tabItem">
+                        <ng-template ngbTabTitle><i class="fas fa-house-user"></i>&nbsp;&nbsp;Detalhes do Proprietários
+                        </ng-template>
+                        <ng-template class="renters__tabItem_content" ngbTabContent>
+                            <div class="newRenter row">
+                                <div class="col-12 pt-3">
+                                    <div *ngIf="message" class="alert alert-success alert-dismissible fade show"
+                                        role="alert">
+                                        {{message}}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <p>Formulário para atualizar proprietário</p>
+                                </div>
+
+                                <form class="newRenter__form col-12" [formGroup]="renterForm"
+                                    (ngSubmit)="renterFormOnSubmit()">
+                                    <div class="row">
+                                        <div class="newRenter__form_subSection col-md-6 pt-2">
+                                            <h6 class="mb-3">Informações pessoais</h6>
+                                            <div class="form-group">
+                                                <label for="name">{{ 'Full Name' | translate }}</label>
+                                                <input type="text" class="form-control" id="name" formControlName="name"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['name']?.errors }"
+                                                    placeholder="">
+
+                                                <div *ngIf="f['name'].invalid" class="invalid-feedback">
+                                                    <span>Insira o nome do Inquilino</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="name">Nome Social *</label>
+                                                <input type="text" class="form-control" id="socialName"
+                                                    formControlName="socialName" placeholder="Nome social">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>CPF</label>
+                                                <input type="text" class="form-control" id="cpf" formControlName="cpf"
+                                                    mask="000.000.000-00"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['cpf']?.errors }"
+                                                    placeholder="CPF">
+
+                                                <div *ngIf="f['cpf'].invalid" class="invalid-feedback">
+                                                    <span>CPF Inválido</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="email">{{ 'Email' | translate }}</label>
+                                                <input type="email" class="form-control" id="email"
+                                                    formControlName="email"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['email']?.errors }"
+                                                    placeholder="{{ 'Email' | translate }}">
+
+                                                <div *ngIf="f['email'].invalid" class="invalid-feedback">
+                                                    <span>Insira um email válido</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div formGroupName="address" class=" newRenter__form_subSection col-md-6 pt-2">
+                                            <h6 class="mb-3">Endereço</h6>
+                                            <div class="row">
+                                                <div class="form-group col-8">
+                                                    <label for="street">Endereço</label>
+                                                    <input type="text" class="form-control" id="street"
+                                                        formControlName="street"
+                                                        [ngClass]="{ 'is-invalid': submitted && address.get('street')?.errors }"
+                                                        placeholder="Endereço">
+
+                                                    <div *ngIf=" address.get('street')?.invalid"
+                                                        class="invalid-feedback">
+                                                        <span>Insira o endereço do Inquilino</span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-4">
+                                                    <label for="number">Numero</label>
+                                                    <input type="number" class="form-control" id="number"
+                                                        formControlName="number"
+                                                        [ngClass]="{ 'is-invalid': submitted && address.get('number')?.errors }"
+                                                        placeholder="Numero">
+
+                                                    <div *ngIf="address.get('number')?.invalid"
+                                                        class="invalid-feedback">
+                                                        <span>Insira o número</span>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group col-8">
+                                                    <label for="neighborhood">Bairro *</label>
+                                                    <input type="text" class="form-control" id="neighborhood"
+                                                        formControlName="neighborhood" placeholder="Endereço">
+                                                </div>
+                                                <div class="form-group col-4">
+                                                    <label for="zipCode">CEP *</label>
+                                                    <input type="text" class="form-control" id="zipCode"
+                                                        formControlName="zipCode" placeholder="CEP" mask="00000-000">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="city">Cidade</label>
+                                                <input type="text" class="form-control" id="city" formControlName="city"
+                                                    [ngClass]="{ 'is-invalid': submitted && address.get('city')?.errors }"
+                                                    placeholder="Cidade">
+
+
+                                                <div *ngIf="address.get('city')?.invalid" class="invalid-feedback">
+                                                    <span>Insira o Cidade</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="uf">Estado</label>
+                                                <select class="form-control" id="uf" formControlName="uf"
+                                                    [ngClass]="{ 'is-invalid': submitted && address.get('uf')?.errors }">
+                                                    <option value="" disabled selected>Selecione o Estado</option>
+                                                    <option *ngFor="let estado of estados" [value]="estado.uf">
+                                                        {{ estado.name }}</option>
+                                                </select>
+                                                <div *ngIf="address.get('uf')?.invalid" class="invalid-feedback">
+                                                    <span>Selecione o estado</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div formArrayName="contacts" class="newRenter__form_subSection col-12 pt-2">
+                                            <h6 class="mb-3">Contato</h6>
+
+                                            <div *ngFor="let contact of contacts.controls; let i=index">
+                                                <div [formGroupName]="i">
+                                                    <div class="row">
+                                                        <div class="form-group col-4">
+                                                            <input type="text" class="form-control" id="phone{{i}}"
+                                                                formControlName="phone"
+                                                                [ngClass]="{ 'is-invalid': submitted && contacts.controls[i].get('phone')?.errors }"
+                                                                mask="(00) 00000-0000" placeholder="Telefone">
+                                                            <div *ngIf="contacts.controls[i].get('phone')?.invalid"
+                                                                class="invalid-feedback">
+                                                                <span>Insira o telefone</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-5 px-0 pt-2">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                    formControlName="phoneType" id="phoneType{{i}}"
+                                                                    value="cellphone">
+                                                                <label class="form-check-label"
+                                                                    for="phoneType{{i}}">Celular</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                    formControlName="phoneType"
+                                                                    id="phoneType{{i}" value="phone">
+                                                                            <label class="form-check-label" for="phoneType{{i}}">Telefone
+                                                                Fixo</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row pt-3 justify-content-end">
+                                        <div class="pr-3">
+                                            <button class="btn btn-primary" type="submit"><i
+                                                    class="fas fa-user-plus"></i>&nbsp;&nbsp;ATUALIZAR
+                                                PROPRIETÁRIO</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </main>
+        </div>
     </div>
-</div>
+</section>

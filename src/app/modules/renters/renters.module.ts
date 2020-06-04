@@ -11,6 +11,8 @@ import { NewRenterComponent } from './components/new-renter/new-renter.component
 import { RentersListComponent } from './components/renters-list/renters-list.component';
 import { RentersDetailsComponent } from './components/renters-details/renters-details.component';
 
+import { RenterService } from '../../services/renter/renter.service';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +28,9 @@ import { RentersDetailsComponent } from './components/renters-details/renters-de
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     NgbModule
+  ],
+  providers: [
+    RenterService
   ]
 })
 export class RentersModule { }

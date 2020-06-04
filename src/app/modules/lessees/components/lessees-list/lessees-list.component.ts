@@ -9,6 +9,7 @@ import { LesseeService } from '../../../../services/lessee/lessee.service';
 })
 export class LesseesListComponent implements OnInit {
   lessees: any;
+
   constructor(
     private lesseeService: LesseeService
   ) { }
@@ -17,14 +18,14 @@ export class LesseesListComponent implements OnInit {
     this.getLessees()
   }
 
-
   getLessees() {
     this.lesseeService.getAllLessees()
       .subscribe(res => {
         this.lessees = res
-        console.log(res)
       })
   }
+
+  deleteLessee = lessee => this.lesseeService.deleteLessee(lessee);
 
 }
 

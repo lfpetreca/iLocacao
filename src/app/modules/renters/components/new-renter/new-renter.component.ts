@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
+import { RenterService } from '../../../../services/renter/renter.service';
+import { Renter } from '../../../../entities/renter/renter';
+
+
 @Component({
   selector: 'app-new-renter',
   templateUrl: './new-renter.component.html',
@@ -11,10 +15,13 @@ export class NewRenterComponent implements OnInit {
 
   newRenterForm: FormGroup;
   submitted: boolean = false;
+  renter: Renter;
+  message: string;
 
   estados: any[];
 
   constructor(
+    private renterService: RenterService,
     private httpClient: HttpClient,
     private formBuilder: FormBuilder
   ) {
@@ -23,8 +30,8 @@ export class NewRenterComponent implements OnInit {
       socialName: [''],
       cpf: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      addressForm: this.formBuilder.group({
-        address: ['', Validators.required],
+      address: this.formBuilder.group({
+        street: ['', Validators.required],
         number: ['', Validators.required],
         neighborhood: [''],
         zipCode: [''],
@@ -43,8 +50,8 @@ export class NewRenterComponent implements OnInit {
 
   public get f() { return this.newRenterForm.controls }
 
-  public get addressForm() { return this.newRenterForm.controls['addressForm'] }
-  public get contactForm() { return this.newRenterForm.get('contacts') as FormArray }
+  public get address() { return this.newRenterForm.controls['address'] }
+  public get contacts() { return this.newRenterForm.get('contacts') as FormArray }
 
   public createContact(): FormGroup {
     return this.formBuilder.group({
@@ -53,18 +60,37 @@ export class NewRenterComponent implements OnInit {
     })
   }
 
-  /* addContact() {
-    this.contactForm.push(this.createContact());
-  } */
-
   newRenterFormOnSubmit() {
     this.submitted = true;
-    console.log(this.newRenterForm.value)
 
     if (this.newRenterForm.invalid) { return; }
-    //Pass the service here
 
+    //Set Object Values
+    this.renter = {
+      name: this.f.name.value,
+      socialName: this.f.socialName.value,
+      cpf: this.f.cpf.value,
+      email: this.f.email.value,
+      address: this.address.value,
+      contacts: this.contacts.value
+    }
+
+    //Pass the service here
+    this.renterService.createNewRenter(this.renter)
+      .then(res => {
+        this.newRenterForm.reset()
+        this.message = 'Proprietário criado com sucesso'
+      }).catch((error: any) => {
+        console.error(error)
+      })
     //Then 
+
+    this.newRenterForm.reset()
+    this.message = 'Proprietário criado com sucesso!'
+  }
+
+  resetMessage() {
+    this.message = null
   }
 
 }

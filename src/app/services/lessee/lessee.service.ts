@@ -10,10 +10,10 @@ export class LesseeService {
     public firestore: AngularFirestore
   ) { }
 
-  createNewLessee(lessee) {
+  createNewLessee(Lessee) {
     return new Promise<any>((resolve, reject) => {
       this.firestore.collection('Lessees')
-        .add(lessee)
+        .add(Lessee)
         .then(res => { }, err => reject(err));
     })
   }
@@ -24,15 +24,16 @@ export class LesseeService {
       .snapshotChanges()
   }
 
-  updateLessee(lessee) {
+  //not working yet
+  updateLessee(key: string, Lessee) {
     return this.firestore.collection('Lessees')
-      .doc(lessee.payload.doc.id)
-      .set({ completed: true }, { merge: true })
+      .doc(key)
+      .set({ Lessee }, { merge: true })
   }
 
-  deleteLessee(lessee) {
+  deleteLessee(Lessee) {
     return this.firestore.collection('Lessees')
-      .doc(lessee.payload.doc.id)
+      .doc(Lessee.payload.doc.id)
       .delete()
   }
 }
