@@ -16,7 +16,7 @@
             <i class="fas fa-id-card"></i>
             <span>{{ 'Renters' | translate }}</span>
         </a>
-        <a (click)="onLoggedout()" class="list-group-item">
+        <a [routerLink]="['/login']" (click)="onLoggedout()" class="list-group-item">
             <i class="fa fa-fw fa-power-off"></i>
             <span>{{ 'Log Out' | translate }}</span>
         </a>
