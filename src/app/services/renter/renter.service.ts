@@ -23,8 +23,7 @@ export class RenterService {
     return this.firestore.collection('Renters')
       .snapshotChanges()
   }
-
-  //not working yet
+  
   updateRenter(key: string, Renter) {
     return this.firestore.collection('Renters')
       .doc(key)

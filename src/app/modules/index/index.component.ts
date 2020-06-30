@@ -12,6 +12,7 @@ export class IndexComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true
   };
+  
   //Deixar dinamico
   public barChartLabels: string[] = ['dez-2019', 'jan-2020', 'fev-2020', 'mar-2020', 'abr-2020', 'mai-2020', 'jun-2020'];
   public barChartType: string;

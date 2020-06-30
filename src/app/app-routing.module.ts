@@ -5,12 +5,8 @@ import { AuthGuard } from '../app/shared/guard/auth.guard';
 import { AuthService } from './services/auth/auth.service';
 
 const routes: Routes = [
- /*  { path: '', loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule) },
-  { path: 'login', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule) },
-  { path: 'signup', loadChildren: () => import('./modules/signup/signup.module').then(m => m.SignupModule) }, */
-
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'dashboard', loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule) },
+  { path: 'home', loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule) },
   { path: 'login', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule), canActivate: [AuthGuard] },
   { path: 'register', loadChildren: () => import('./modules/signup/signup.module').then(m => m.SignupModule), canActivate: [AuthGuard] },
 ];

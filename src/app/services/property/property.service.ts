@@ -23,8 +23,7 @@ export class PropertyService {
     return this.firestore.collection('Properties')
       .snapshotChanges()
   }
-
-  //not working yet
+  
   updateProperty(key: string, Property) {
     return this.firestore.collection('Properties')
       .doc(key)

@@ -23,8 +23,7 @@ export class LesseeService {
     return this.firestore.collection('Lessees')
       .snapshotChanges()
   }
-
-  //not working yet
+  
   updateLessee(key: string, Lessee) {
     return this.firestore.collection('Lessees')
       .doc(key)
