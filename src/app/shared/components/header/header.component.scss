@@ -1,11 +1,15 @@
 @import '../../../../assets/scss/variables';
-@import url('https://fonts.googleapis.com/css?family=Sen:800&display=swap');
 
-:host {
-    .navbar { background-color: $primary; 
-        .navbar-brand { padding: 2px 20px; background-color: white; color: $primary; border-radius: 10px; text-decoration: none; font-size: 1.5rem;
-            span { font-family: 'Sen', sans-serif; }
-        }
-        .navbar-toggler, .nav-item > a { color: white; }
-    }   
+.menu { padding-right: 15px; }
+
+.logo { display: flex; align-items: center; padding: 0px 10px; background-color: white; color: $primary; border-radius: 5px; transition: .3s; text-decoration: none;
+    &:hover { cursor: pointer; transform: scale(1.1); transition: .3s;}
+    mat-icon { font-size: 25px; margin-right: 5px; }
+    span { font-size: 15px; font-weight: bold; margin-top: 3px; font-family: 'Frank Ruhl Libre', serif; }
+}
+
+.navitagion-items { margin: 0; padding: 0; list-style: none; 
+    a { text-decoration: none; color: white; 
+        &:active, &:hover { opacity: 0.8; cursor: pointer; }
+    }
 }

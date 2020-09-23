@@ -1,41 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { Store } from '@ngrx/store';
 
-import { LesseeService } from '../../../../services/lessee/lessee.service';
+import { Lessee } from '../../entities/lessee';
+import { LesseeService } from '../../services/lessees.service';
+import * as fromLessee from '../../lessees.reducer';
 
 @Component({
   selector: 'app-lessees-list',
   templateUrl: './lessees-list.component.html',
   styleUrls: ['./lessees-list.component.scss']
 })
-export class LesseesListComponent implements OnInit {
-  lessees: any;
+export class LesseesListComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['name', 'email', 'phone', 'actions'];
+  dataSource = new MatTableDataSource<Lessee>();
+
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    private lesseeService: LesseeService
+    private _lesseeService: LesseeService,
+    private _store: Store<fromLessee.State>
   ) { }
 
-  ngOnInit() {
-    this.getLessees()
+  ngOnInit(): void {
+    this._store.select(fromLessee.getAvailableLesses)
+      .subscribe((lessees: Lessee[]) => {
+        this.dataSource.data = lessees;
+      });
+    this._lesseeService.fetchExercises();
   }
 
-  getLessees() {
-    this.lesseeService.getAllLessees()
-      .subscribe(res => {
-        this.lessees = res
-      })
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
-  deleteLessee = lessee => this.lesseeService.deleteLessee(lessee);
+  applyFilter(filterValue: string): void {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.paginator.firstPage();
+  }
 
 }
-
-const mockUsers = [
-  { id: "493", name: "Bruce Dickson", email: "dickson_ironMaiden8@email.com", phone: "11 95534-0666" },
-  { id: "653", name: "Steve Harris", email: "harris_ironMaiden@email.com", phone: "11 5674-8666" },
-  { id: "93", name: "Ozzy Osbourne", email: "osbourne_blackSabbath@email.com", phone: "11 6434-8666" },
-  { id: "543", name: "Geezer Butler", email: "butler_blackSabbath@email.com", phone: "11 1244-0666" },
-  { id: "19", name: "Roger Waters", email: "waters_pinkFloyd@email.com", phone: "11 2075-1902" },
-  { id: "70", name: "Ian Anderson", email: "anderson_jethroTull@email.com", phone: "11 81637-7320" },
-  { id: "114", name: "Mike Rutherford", email: "rutherford_genesis@email.com", phone: "11 98734-5461" },
-
-]

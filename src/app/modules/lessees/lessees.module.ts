@@ -1,35 +1,26 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { NgxMaskModule } from 'ngx-mask';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { StoreModule } from '@ngrx/store';
 
+import { SharedModule } from '../../shared/shared.module';
 import { LesseesRoutingModule } from './lessees-routing.module';
 import { LesseesComponent } from './components/lessees/lessees.component';
-import { NewLesseesComponent } from './components/new-lessees/new-lessees.component';
 import { LesseesListComponent } from './components/lessees-list/lessees-list.component';
 import { LesseesDetailsComponent } from './components/lessees-details/lessees-details.component';
+import { NewLesseesComponent } from './components/new-lessees/new-lessees.component';
+import { lesseeReducer } from './lessees.reducer';
 
-import { LesseeService } from '../../services/lessee/lessee.service';
 
 @NgModule({
   declarations: [
     LesseesComponent,
-    NewLesseesComponent,
     LesseesListComponent,
-    LesseesDetailsComponent
+    LesseesDetailsComponent,
+    NewLesseesComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     LesseesRoutingModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    NgxMaskModule,
-    NgbModule
-  ], 
-  providers: [
-    LesseeService
+    StoreModule.forFeature('lessees', lesseeReducer)
   ]
 })
 export class LesseesModule { }

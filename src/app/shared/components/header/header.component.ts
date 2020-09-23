@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { Location } from '@angular/common';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 
-import { AuthService } from '../../../services/auth/auth.service';
+import { AuthService } from '../../../auth/services/auth.service';
+import * as fromRoot from '../../../app.reducer';
 
 @Component({
   selector: 'app-header',
@@ -11,50 +11,23 @@ import { AuthService } from '../../../services/auth/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  public pushRightClass: string;
+  @Output() sidenavToggle = new EventEmitter<void>();
+  isAuth$: Observable<boolean>;
 
   constructor(
-    public auth: AuthService,
-    private location : Location,
-    private translate: TranslateService,
-    public router: Router
-  ) {
-    this.router.events.subscribe(val => {
-      if (
-        val instanceof NavigationEnd &&
-        window.innerWidth <= 992 &&
-        this.isToggled()
-      ) {
-        this.toggleSidebar();
-      }
-    });
+    private _authService: AuthService,
+    private _store: Store<fromRoot.State>
+  ) { }
+
+  ngOnInit(): void {
+    this.isAuth$ = this._store.select(fromRoot.getIsAuthenticated);
   }
 
-  ngOnInit() {
-    this.pushRightClass = 'push-right';
+  onToggleSidenav(): void {
+    this.sidenavToggle.emit();
   }
 
-  isToggled(): boolean {
-    const dom: Element = document.querySelector('body');
-    return dom.classList.contains(this.pushRightClass);
+  onLogout(): void {
+    this._authService.logout();
   }
-
-  toggleSidebar() {
-    const dom: any = document.querySelector('body');
-    dom.classList.toggle(this.pushRightClass);
-  }
-
-  onLoggedout() {
-    this.auth.doLogout()
-      .then((res) => {
-        this.router.navigate(['/login']);
-      }, (error) => {
-        console.log("Logout error", error);
-      });
-  }
-
-  changeLang(language: string) {
-    this.translate.use(language);
-  }
-
 }

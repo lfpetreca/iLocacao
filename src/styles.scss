@@ -1,20 +1,6 @@
-@import '../src/assets/scss/variables';
-@import '../node_modules/bootstrap/scss/bootstrap.scss';
+/* You can add global styles to this file, and also import other style files */
+@import './assets/scss/custom-theme';
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700&display=swap');
 
 html, body { height: 100%; }
-body { margin: 0; font-family: 'Franklin Gothic Medium', Arial, sans-serif; }
-
-.properties, .renters, .lessees { 
-    .nav-link { color: $mainBg;
-        &.active { color: $primary; font-weight: bold; background-color: $lightBg; border-bottom-color: transparent; }
-        &:hover{ color: $primary;}
-    }
-
-    tbody th { font-weight: 300; color: $text; }
-}
-
-@media screen and (max-width: 992px) {
-    .push-right {
-        .sidebar { left: 235px !important;  }
-    }
-}   
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

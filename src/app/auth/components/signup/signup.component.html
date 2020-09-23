@@ -1,0 +1,41 @@
+<section class="signup" fxLayout="row" fxLayoutAlign="center center">
+    <div class="signup__form">
+        <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <div class="signup__form-logo" fxLayoutAlign="center">
+                <mat-icon>memory</mat-icon>
+                <span>iLocação</span>
+            </div>
+
+            <div class="signup__form-title">
+                <h2>Sign up</h2>
+            </div>
+
+            <mat-form-field class="signup__form-item" appearance="legacy">
+                <mat-label>E-mail</mat-label>
+                <input matInput placeholder="email@email.com" formControlName="email">
+                <mat-icon matSuffix color="primary">email</mat-icon>
+                <mat-error *ngIf="f.controls.email.errors">Must have a valid e-mail</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="signup__form-item" appearance="legacy">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password">
+                <mat-icon class="password-icon" matSuffix color="primary">vpn_key</mat-icon>
+                <mat-error *ngIf="f.controls.password.errors">Your password should be wrong</mat-error>
+            </mat-form-field>
+
+            <div class="signup__form-item">
+                <mat-checkbox color="primary" formControlName="agree">Agree to Terms and Conditions</mat-checkbox>
+                <mat-error class="signup__form-item-error" *ngIf="f.controls.agree.errors">You must agree with our terms
+                    and conditions</mat-error>
+            </div>
+
+            <div class="signup__form-actions" *ngIf="!(isLoading$ | async)">
+                <a mat-stroked-button color="primary" [routerLink]="['/login']">Return</a>
+                <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Sign up</button>
+            </div>
+
+            <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+        </form>
+    </div>
+</section>

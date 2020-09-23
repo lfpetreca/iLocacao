@@ -1,48 +1,22 @@
-<header>
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <a class="navbar-brand" routerLink="/">
-            <span>iLocação</span>&nbsp;
-            <i class="fab fa-galactic-senate"></i>
-        </a>
-
-        <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
-            <i class="fas fa-bars"></i>
+<mat-toolbar color="primary">
+    <div fxHide.gt-xs class="menu">
+        <button mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon>menu</mat-icon>
         </button>
+    </div>
 
-        <div class="collapse navbar-collapse">
-            <ul class="nav ml-auto">
-                <li class="nav-item dropdown" ngbDropdown>
-                    <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
-                        <i class="fa fa-language"></i>
-                        {{ 'Language' | translate }}
-                    </a>
-                    <div class="dropdown-menu-right" ngbDropdownMenu>
-                        <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('en')">
-                            {{ 'English' | translate }}
-                        </a>
-                        <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('pt')">
-                            {{ 'Portuguese' | translate }}
-                        </a>
-                    </div>
-                </li>
+    <div>
+        <a class="logo" [routerLink]="['/']">
+            <mat-icon>memory</mat-icon>
+            <span>iLocação</span>
+        </a>
+    </div>
 
-                <li class="nav-item dropdown" ngbDropdown>
-                    <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
-                        <i class="fa fa-user"></i> {{ 'UserName' | translate }}
-                    </a>
-                    <div class="dropdown-menu-right" ngbDropdownMenu>
-                        <a class="dropdown-item">
-                            <i class="fa fa-user"></i> {{'Account' | translate}}
-                        </a>                    
-                        <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">
-                            <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
-                        </a>
-                    </div>
-                </li>
-
-            </ul>
-        </div>
-
-    </nav>
-
-</header>
+    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+        <ul class="navitagion-items" fxLayout fxLayoutGap="15px">
+            <li *ngIf="!(isAuth$ | async)"><a [routerLink]="['/signup']">Signup</a></li>
+            <li *ngIf="!(isAuth$ | async)"><a [routerLink]="['/login']">Login</a></li>            
+            <li *ngIf="isAuth$ | async"><a (click)="onLogout()">Logout</a></li>
+        </ul>
+    </div>
+</mat-toolbar>

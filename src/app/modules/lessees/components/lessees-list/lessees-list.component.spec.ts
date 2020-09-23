@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LesseesListComponent } from './lessees-list.component';
 
@@ -6,12 +6,12 @@ describe('LesseesListComponent', () => {
   let component: LesseesListComponent;
   let fixture: ComponentFixture<LesseesListComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ LesseesListComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LesseesListComponent);

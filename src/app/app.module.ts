@@ -1,34 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { NgxMaskModule } from 'ngx-mask';
-import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AngularFireModule } from "@angular/fire";
-import { AngularFireDatabaseModule } from "@angular/fire/database";
-import { AngularFireAuthModule } from "@angular/fire/auth";
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { StoreModule } from '@ngrx/store';
 
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
+import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LayoutModule } from './layout/layout.module';
-import { LanguageTranslationModule } from './shared/modules/language-translation/language-translation.module'
-import { AuthGuard } from './shared/guard/auth.guard';
-import { AuthService } from './services/auth/auth.service';
-import { UserService } from './services/user/user.service';
-
-export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
-  align: "left",
-  allowNegative: true,
-  decimal: ",",
-  precision: 2,
-  prefix: "R$ ",
-  suffix: "",
-  thousands: "."
-};
+import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/services/auth.service';
+import { UIService } from './shared/services/ui.service';
+import { reducers } from './app.reducer';
 
 @NgModule({
   declarations: [
@@ -36,25 +21,18 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    CommonModule,
-    ReactiveFormsModule,
-    LayoutModule,
-    HttpClientModule,
-    LanguageTranslationModule,
-    NgxMaskModule.forRoot(),
-    CurrencyMaskModule,
-    NgbModule,
+    MaterialModule,
+    FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AuthModule,
+    StoreModule.forRoot(reducers)
   ],
   providers: [
     AuthService,
-    AuthGuard,
-    UserService,
-    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
+    UIService
   ],
   bootstrap: [AppComponent]
 })
