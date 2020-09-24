@@ -6,8 +6,8 @@ import { CoreComponent } from './core.component';
 const routes: Routes = [{
   path: '', component: CoreComponent,
   children: [
-    // { path: '', redirectTo: 'lessees' },
-    { path: '', loadChildren: () => import('../modules/lessees/lessees.module').then(m => m.LesseesModule) },
+    { path: '', loadChildren: () => import('../modules/home/home.module').then(m => m.HomeModule) },
+    { path: 'lessees', loadChildren: () => import('../modules/lessees/lessees.module').then(m => m.LesseesModule) },
     { path: 'renters', loadChildren: () => import('../modules/renters/renters.module').then(m => m.RentersModule) },
     { path: 'properties', loadChildren: () => import('../modules/properties/properties.module').then(m => m.PropertiesModule) }
   ]

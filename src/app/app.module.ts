@@ -5,6 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { StoreModule } from '@ngrx/store';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { environment } from '../environments/environment';
 import { MaterialModule } from './material.module';
@@ -28,7 +29,8 @@ import { reducers } from './app.reducer';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AuthModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    NgxMaskModule.forRoot()
   ],
   providers: [
     AuthService,

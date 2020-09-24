@@ -1,11 +1,11 @@
-<mat-card>
-    <div class="content-header">
-        <mat-card-title-group>
+<mat-card fxFlex fxLayout="column">
+    <div class="header" fxFlex fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between">
+        <mat-card-title-group class="header__title">
             <mat-card-title>List of all Lessees</mat-card-title>
+            <mat-card-subtitle>Some Subtitle</mat-card-subtitle>
         </mat-card-title-group>
 
-        <div>
-            <mat-card-subtitle>Type to filter</mat-card-subtitle>
+        <div class="header__filter">
             <mat-form-field>
                 <mat-label>Filter</mat-label>
                 <input matInput (keyup)="applyFilter($event.target.value)" #filter>
@@ -13,8 +13,8 @@
             </mat-form-field>
         </div>
     </div>
-    <div class="mat-elevation-z8 lesseeData">
-        <table class="lesseeData__table" mat-table [dataSource]="dataSource" matSort>
+    <div class="mat-elevation-z8 data">
+        <table class="data__table" mat-table [dataSource]="dataSource" matSort>
             <!-- Name Column -->
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
@@ -27,20 +27,19 @@
                 <td mat-cell *matCellDef="let element">{{element.email}}</td>
             </ng-container>
 
-            <!-- phone Column -->
+            <!-- Phone Column -->
             <ng-container matColumnDef="phone">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
-                <td mat-cell *matCellDef="let element">{{element.contacts[0].phone }}</td>
+                <td mat-cell *matCellDef="let element">{{element.contacts[0].phone | mask: '(00) 000000000' }}</td>
             </ng-container>
 
             <!-- Actions Column -->
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
-                <td mat-cell *matCellDef="let element">
-                    <a mat-button>
-                        some action
-                    </a>
-                    {{element.id}}
+                <td class="data__table-actions" mat-cell *matCellDef="let element">
+                    <button class="mr-5" mat-stroked-button color="warn"
+                        (click)="deleteLessee(element.id)">Delete</button>
+                    <a class="ml-5" mat-stroked-button color="accent" [routerLink]="element.id">Details</a>
                 </td>
             </ng-container>
 
@@ -52,6 +51,6 @@
                 <td class="mat-cell" colspan="4">No data matching the filter "{{filter.value}}"</td>
             </tr>
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
     </div>
 </mat-card>

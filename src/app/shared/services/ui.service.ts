@@ -12,7 +12,9 @@ export class UIService {
 
   showSnackbar(message, action, durationTime): void {
     this._snackbar.open(message, action, {
-      duration: durationTime
+      duration: durationTime,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
     });
   }
 }

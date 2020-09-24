@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import './assets/scss/custom-theme';
+@import './assets/scss/utilities';
+@import './assets/scss/variables';
 @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700&display=swap');
 
 html, body { height: 100%; }

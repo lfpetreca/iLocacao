@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 
 import { Lessee } from '../../entities/lessee';
 import { LesseeService } from '../../services/lessees.service';
+import { UIService } from '../../../../shared/services/ui.service';
 import * as fromLessee from '../../lessees.reducer';
 
 @Component({
@@ -22,7 +23,8 @@ export class LesseesListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _lesseeService: LesseeService,
-    private _store: Store<fromLessee.State>
+    private _store: Store<fromLessee.State>,
+    private _uiService: UIService
   ) { }
 
   ngOnInit(): void {
@@ -30,7 +32,7 @@ export class LesseesListComponent implements OnInit, AfterViewInit {
       .subscribe((lessees: Lessee[]) => {
         this.dataSource.data = lessees;
       });
-    this._lesseeService.fetchExercises();
+    this._lesseeService.fetchAvailableLesses();
   }
 
   ngAfterViewInit(): void {
@@ -43,4 +45,7 @@ export class LesseesListComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator.firstPage();
   }
 
+  deleteLessee(lesseeId: string): void {
+    this._uiService.showSnackbar(lesseeId, 'X', 4000);
+  }
 }

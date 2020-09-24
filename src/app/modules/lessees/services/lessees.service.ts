@@ -41,15 +41,6 @@ export class LesseeService {
     );
   }
 
-  fetchExercises(): void {
-    this._firebaseSubs.push(
-      this._db.collection('Lessees').valueChanges()
-        .subscribe((exercises: Lessee[]) => {
-          this._store.dispatch(new LesseeActions.SetAvailableLessee(exercises));
-        })
-    );
-  }
-
   private addLesseeToDatabase(lessee: Lessee): void {
     this._db.collection('Lessees').add(lessee);
   }
