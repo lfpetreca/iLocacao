@@ -2,7 +2,6 @@ export class Lessee {
     name: string;
     socialName: string;
     cpf: string;
-    email: string;
     address: {
         street: string;
         number: string;
@@ -11,10 +10,8 @@ export class Lessee {
         city: string;
         uf: string;
     };
-    contacts: [
-        {
-            phone: string;
-            phoneType: string;
-        }
-    ];
+    contacts: {
+        email: string;
+        phone: string;
+    };
 }

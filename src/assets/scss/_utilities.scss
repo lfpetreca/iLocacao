@@ -18,3 +18,16 @@ $sides: (top, right, bottom, left);
     }
   }
 }
+
+//Breakpoint
+@mixin breakpoint($point){
+    @if ($point == lg){
+      @media (min-width: 1280px){ @content }
+    }
+    @else if ($point == md){
+      @media (min-width: 960px) { @content }
+    }
+    @else if ($point == sm){
+      @media (min-width: 600px){ @content }
+    }    
+}

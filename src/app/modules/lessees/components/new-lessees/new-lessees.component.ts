@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { Lessee } from '../../entities/lessee';
+import { LocalitiesService } from '../../../../shared/services/localities.service';
 
 @Component({
   selector: 'app-new-lessees',
@@ -6,10 +10,68 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-lessees.component.scss']
 })
 export class NewLesseesComponent implements OnInit {
+  personalForm: FormGroup;
+  addressForm: FormGroup;
+  contactsForm: FormGroup;
+  states: any = [];
+  cities: any = [];
 
-  constructor() { }
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _localitiesService: LocalitiesService
+  ) { }
 
   ngOnInit(): void {
+    this.createForm();
+    this.states = this._localitiesService.ufList();
+    this.cities = this._localitiesService.getCities('SP');
+  }
+
+  createForm(): void {
+    this.personalForm = this._formBuilder.group({
+      name: ['', Validators.required],
+      socialName: [''],
+      cpf: ['', Validators.required]
+    });
+    this.addressForm = this._formBuilder.group({
+      street: ['', Validators.required],
+      number: ['', Validators.required],
+      neighborhood: ['', Validators.required],
+      zipCode: ['', Validators.required],
+      city: ['', Validators.required],
+      uf: ['SP', Validators.required]
+    });
+    this.contactsForm = this._formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required]
+    });
+  }
+
+  get fPersonal(): FormGroup { return this.personalForm; }
+  get fAddress(): FormGroup { return this.addressForm; }
+  get fContacts(): FormGroup { return this.contactsForm; }
+
+  getTheCities(uf: string): void {
+    this.cities = this._localitiesService.getCities(uf);
+  }
+
+  onSubmit(): void {
+    const lessee = new Lessee();
+
+    lessee.name = this.fPersonal.value.name;
+    lessee.socialName = this.fPersonal.value.socialName;
+    lessee.cpf = this.fPersonal.value.cpf;
+    lessee.address = {
+      street: this.fAddress.value.street,
+      number: this.fAddress.value.number,
+      neighborhood: this.fAddress.value.neighborhood,
+      zipCode: this.fAddress.value.zipCode,
+      city: this.fAddress.value.city,
+      uf: this.fAddress.value.uf
+    };
+    lessee.contacts = { phone: this.fContacts.value.phone, email: this.fContacts.value.email };
+
+    console.log(lessee);
   }
 
 }

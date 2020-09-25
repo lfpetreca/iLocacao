@@ -12,6 +12,23 @@
         <mat-icon color="primary">login</mat-icon>
         <span class="nav-caption">Login</span>
     </a>
+
+    <a mat-list-item [routerLink]="['/']" (click)="onClose()">
+        <mat-icon color="primary">insights</mat-icon>
+        <span class="nav-caption">Resume</span>
+    </a>
+    <a mat-list-item [routerLink]="['/lessees']" (click)="onClose()">
+        <mat-icon color="primary">night_shelter</mat-icon>
+        <span class="nav-caption">Lessees</span>
+    </a>
+    <a mat-list-item [routerLink]="['/properties']" (click)="onClose()">
+        <mat-icon color="primary">home_work</mat-icon>
+        <span class="nav-caption">Properties</span>
+    </a>
+    <a mat-list-item [routerLink]="['/renters']" (click)="onClose()">
+        <mat-icon color="primary">streetview</mat-icon>
+        <span class="nav-caption">Renters</span>
+    </a>
   
     <a *ngIf="isAuth$ | async" mat-list-item (click)="onLogout()">        
         <mat-icon color="primary">reply</mat-icon>

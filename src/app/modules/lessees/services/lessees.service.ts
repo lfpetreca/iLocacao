@@ -44,4 +44,21 @@ export class LesseeService {
   private addLesseeToDatabase(lessee: Lessee): void {
     this._db.collection('Lessees').add(lessee);
   }
+
+  fetchLessee(key: string): void {
+    this._store.dispatch(new UI.StartLoading());
+    this._firebaseSubs.push(
+      this._db.collection('Lessees')
+        .doc(key).valueChanges()
+        .pipe(map(lessee => lessee))
+        .subscribe((lessee: Lessee) => {
+          this._store.dispatch(new UI.StopLoading());
+          this._store.dispatch(new LesseeActions.GetLessee(lessee));
+        }, err => {
+          this._store.dispatch(new UI.StopLoading());
+          this._uiService.showSnackbar('Fetching Lessees failed, plese try again later', null, 4000);
+        })
+    );
+  }
+
 }

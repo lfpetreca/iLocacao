@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
 
 import { MaterialModule } from '../material.module';
@@ -11,6 +12,7 @@ const modules = [
   MaterialModule,
   FlexLayoutModule,
   ReactiveFormsModule,
+  HttpClientModule,
   NgxMaskModule
 ];
 

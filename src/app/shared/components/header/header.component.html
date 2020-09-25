@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-    <div fxHide.gt-xs class="menu">
+    <div class="menu">
         <button mat-icon-button (click)="onToggleSidenav()">
             <mat-icon>menu</mat-icon>
         </button>
@@ -13,11 +13,8 @@
     </div>
 
     <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
-        <ul class="navitagion-items" fxLayout fxLayoutGap="15px">
-            <li *ngIf="!(isAuth$ | async)"><a [routerLink]="['/signup']">Signup</a></li>
-            <li *ngIf="!(isAuth$ | async)"><a [routerLink]="['/login']">Login</a></li>
-            <li><a [routerLink]="['/lessees']">Lessees</a></li>
-            <li><a [routerLink]="['/renters']">Renters</a></li>
+        <ul class="navitagion-items" fxLayout fxLayoutGap="15px">           
+            <li *ngIf="!(isAuth$ | async)"><a [routerLink]="['/login']">Login</a></li>            
             <li *ngIf="isAuth$ | async"><a (click)="onLogout()">Logout</a></li>
         </ul>
     </div>

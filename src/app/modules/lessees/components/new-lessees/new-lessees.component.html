@@ -1,1 +1,105 @@
-<p>new-lessees works!</p>
+<mat-card fxFlex fxLayout="column">
+    <div class="header">
+        <mat-card-title-group class="header__title">
+            <mat-card-title>Add a new Lessee</mat-card-title>
+            <mat-card-subtitle>Here you can create a new lessee</mat-card-subtitle>
+        </mat-card-title-group>
+    </div>
+
+    <mat-vertical-stepper linear #stepper>
+        <mat-step [stepControl]="personalForm">
+            <form [formGroup]="personalForm">
+                <ng-template matStepLabel>Lessee Personal Information</ng-template>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name" placeholder="Lessee Name">
+                        <mat-error *ngIf="fPersonal.controls.name.errors">Lessee name is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Social Name</mat-label>
+                        <input matInput formControlName="socialName" placeholder="Lesse Social Name">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>CPF</mat-label>
+                        <input matInput formControlName="cpf" mask="000.000.000-00" placeholder="Document number">
+                        <mat-error *ngIf="fPersonal.controls.cpf.errors">CPF is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="mt-5">
+                    <button mat-raised-button matStepperNext color="primary">Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="addressForm">
+            <form [formGroup]="addressForm">
+                <ng-template matStepLabel>Lessee Address</ng-template>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Street</mat-label>
+                        <input matInput formControlName="street" placeholder="Eg: Av. Pedro Álvares Cabral">
+                        <mat-error *ngIf="fAddress.controls.street.errors">Street name is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Number</mat-label>
+                        <input matInput formControlName="number" placeholder="Eg: 159">
+                        <mat-error *ngIf="fAddress.controls.number.errors">Number is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Neighborhood</mat-label>
+                        <input matInput formControlName="neighborhood" placeholder="Eg: Vila Mariana">
+                        <mat-error *ngIf="fAddress.controls.neighborhood.errors">Neighborhood is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Zip Code</mat-label>
+                        <input matInput formControlName="zipCode" mask="00000-000" placeholder="Eg: 04094-050">
+                        <mat-error *ngIf="fAddress.controls.zipCode.errors">Zip Code is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>City</mat-label>
+                        <mat-select ngDefaultControl formControlName="city">
+                            <mat-option *ngFor="let city of cities" value="{{city}}">{{city}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="fAddress.controls.city.errors">City is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>State</mat-label>
+                        <mat-select #state ngDefaultControl formControlName="uf"
+                            (selectionChange)="getTheCities(state.value)">
+                            <mat-option *ngFor="let state of states" value="{{state.acronym}}">{{state.state}} -
+                                {{state.acronym}}</mat-option>
+                            <mat-error *ngIf="fAddress.controls.uf.errors">State is required</mat-error>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="mt-5">
+                    <button mat-button matStepperPrevious color="primary">Return</button>
+                    <button mat-raised-button matStepperNext color="primary">Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="contactsForm">
+            <form [formGroup]="contactsForm" (ngSubmit)="onSubmit()">
+                <ng-template matStepLabel>Fill out your name</ng-template>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" placeholder="Eg: lessee_email@email.com">
+                        <mat-error *ngIf="fContacts.controls.email.errors">Email is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Cellphone</mat-label>
+                        <input matInput formControlName="phone" mask="(00) 0 0000-0000" placeholder="(11) 9 5611-1666">
+                        <mat-error *ngIf="fContacts.controls.phone.errors">Cellphone is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="mt-5">
+                    <button mat-button matStepperPrevious color="primary">Return</button>
+                    <button mat-raised-button color="primary" type="submit"
+                        [disabled]="fContacts.invalid">Submit</button>
+                </div>
+            </form>
+        </mat-step>
+
+    </mat-vertical-stepper>
+</mat-card>
