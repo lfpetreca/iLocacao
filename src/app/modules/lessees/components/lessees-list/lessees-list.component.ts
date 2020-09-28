@@ -3,11 +3,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { Store } from '@ngrx/store';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Lessee } from '../../entities/lessee';
 import { LesseeService } from '../../services/lessees.service';
 import { UIService } from '../../../../shared/services/ui.service';
 import * as fromLessee from '../../lessees.reducer';
+import { DeleteLesseeComponent } from './delete-lessees.component';
 
 @Component({
   selector: 'app-lessees-list',
@@ -24,7 +26,8 @@ export class LesseesListComponent implements OnInit, AfterViewInit {
   constructor(
     private _lesseeService: LesseeService,
     private _store: Store<fromLessee.State>,
-    private _uiService: UIService
+    private _uiService: UIService,
+    private _dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -45,7 +48,13 @@ export class LesseesListComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator.firstPage();
   }
 
-  deleteLessee(lesseeId: string): void {
-    this._uiService.showSnackbar(lesseeId, 'X', 4000);
+  deleteLessee(lesseeId: string, lessee: string): void {
+    const dialogRef = this._dialog.open(DeleteLesseeComponent, { data: { lesseeName: lessee } });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this._lesseeService.deleteLessee(lesseeId);
+      }
+    });
   }
 }

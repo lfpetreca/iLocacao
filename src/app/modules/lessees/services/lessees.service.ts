@@ -36,13 +36,35 @@ export class LesseeService {
           this._store.dispatch(new LesseeActions.SetAvailableLessee(lessees));
         }, err => {
           this._store.dispatch(new UI.StopLoading());
-          this._uiService.showSnackbar('Fetching Lessees failed, plese try again later', null, 4000);
+          this._uiService.showSnackbar('Fetching Lessees failed, plese try again!', null, 4000);
         })
     );
   }
 
-  private addLesseeToDatabase(lessee: Lessee): void {
-    this._db.collection('Lessees').add(lessee);
+  addLesseeToDatabase(lessee: Lessee): void {
+    this._store.dispatch(new UI.StartLoading());
+    this._db.collection('Lessees').add({ ...lessee })
+      .then((addedLessee) => {
+        console.log(addedLessee);
+        this._store.dispatch(new UI.StopLoading());
+        // this._store.dispatch(new LesseeActions.SetAvailableLessee(addedLessee));
+        this._uiService.showSnackbar('Lessee successfully added!', null, 4000);
+      }).catch(err => {
+        this._store.dispatch(new UI.StopLoading());
+        this._uiService.showSnackbar('Adding Lessee failed, plese try again!', null, 4000);
+      });
+  }
+
+  deleteLessee(lesseeId: string): void {
+    this._store.dispatch(new UI.StartLoading());
+    this._db.collection('Lessees').doc(lesseeId).delete()
+      .then(() => {
+        this._store.dispatch(new UI.StopLoading());
+        this._uiService.showSnackbar('Lessee successfully deleted!', null, 4000);
+      }).catch(err => {
+        this._store.dispatch(new UI.StopLoading());
+        this._uiService.showSnackbar('Delete Lessee failed, plese try again!', null, 4000);
+      });
   }
 
   fetchLessee(key: string): void {

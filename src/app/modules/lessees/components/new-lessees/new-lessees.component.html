@@ -6,7 +6,11 @@
         </mat-card-title-group>
     </div>
 
-    <mat-vertical-stepper linear #stepper>
+    <div *ngIf="isLoading$ | async">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <mat-vertical-stepper linear #stepper *ngIf="!(isLoading$ | async)">
         <mat-step [stepControl]="personalForm">
             <form [formGroup]="personalForm">
                 <ng-template matStepLabel>Lessee Personal Information</ng-template>

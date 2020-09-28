@@ -40,7 +40,7 @@
                 <td mat-cell *matCellDef="let element">
                     <div class="data__table-actions">
                         <button class="ml-5" mat-stroked-button color="warn"
-                            (click)="deleteLessee(element.id)">Delete</button>
+                            (click)="deleteLessee(element.id, element.name)">Delete</button>
                         <a class="ml-5" mat-stroked-button color="accent" [routerLink]="element.id">Details</a>
                     </div>
                 </td>

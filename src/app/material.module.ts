@@ -18,6 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const modules = [
   MatSidenavModule,
@@ -38,7 +39,8 @@ const modules = [
   MatTableModule,
   MatSortModule,
   MatPaginatorModule,
-  MatStepperModule
+  MatStepperModule,
+  MatDialogModule
 ];
 
 @NgModule({

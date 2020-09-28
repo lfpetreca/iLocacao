@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
 import { Lessee } from '../../entities/lessee';
 import { LocalitiesService } from '../../../../shared/services/localities.service';
+import { LesseeService } from '../../services/lessees.service';
+import { UIService } from '../../../../shared/services/ui.service';
+import * as fromRoot from '../../../../app.reducer';
+import * as fromLessee from '../../lessees.reducer';
+
 
 @Component({
   selector: 'app-new-lessees',
@@ -15,13 +22,18 @@ export class NewLesseesComponent implements OnInit {
   contactsForm: FormGroup;
   states: any = [];
   cities: any = [];
+  isLoading$: Observable<boolean>;
 
   constructor(
     private _formBuilder: FormBuilder,
-    private _localitiesService: LocalitiesService
+    private _localitiesService: LocalitiesService,
+    private _lesseeService: LesseeService,
+    private _store: Store<fromLessee.State>
   ) { }
 
   ngOnInit(): void {
+    this.isLoading$ = this._store.select(fromRoot.getIsLoading);
+
     this.createForm();
     this.states = this._localitiesService.ufList();
     this.cities = this._localitiesService.getCities('SP');
@@ -71,7 +83,11 @@ export class NewLesseesComponent implements OnInit {
     };
     lessee.contacts = { phone: this.fContacts.value.phone, email: this.fContacts.value.email };
 
-    console.log(lessee);
+    this._lesseeService.addLesseeToDatabase(lessee);
+
+    this.fPersonal.reset();
+    this.fAddress.reset();
+    this.fContacts.reset();
   }
 
 }
