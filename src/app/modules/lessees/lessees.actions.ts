@@ -15,7 +15,7 @@ export class SetAvailableLessee implements Action {
 export class GetLessee implements Action {
     readonly type = GET_LESSEE;
 
-    constructor(public payload: any) { }
+    constructor(public payload: Lessee) { }
 }
 
 export type LesseeActions = SetAvailableLessee | GetLessee;

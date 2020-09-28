@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { map, take } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { Lessee } from '../entities/lessee';
@@ -35,8 +35,7 @@ export class LesseeService {
           this._store.dispatch(new UI.StopLoading());
           this._store.dispatch(new LesseeActions.SetAvailableLessee(lessees));
         }, err => {
-          this._store.dispatch(new UI.StopLoading());
-          this._uiService.showSnackbar('Fetching Lessees failed, plese try again!', null, 4000);
+          this.dispatchReturnOrError('Fetching Lessees failed, plese try again!', null, 4000);
         })
     );
   }
@@ -44,14 +43,10 @@ export class LesseeService {
   addLesseeToDatabase(lessee: Lessee): void {
     this._store.dispatch(new UI.StartLoading());
     this._db.collection('Lessees').add({ ...lessee })
-      .then((addedLessee) => {
-        console.log(addedLessee);
-        this._store.dispatch(new UI.StopLoading());
-        // this._store.dispatch(new LesseeActions.SetAvailableLessee(addedLessee));
-        this._uiService.showSnackbar('Lessee successfully added!', null, 4000);
+      .then(() => {
+        this.dispatchReturnOrError('Lessee successfully added!', null, 4000);
       }).catch(err => {
-        this._store.dispatch(new UI.StopLoading());
-        this._uiService.showSnackbar('Adding Lessee failed, plese try again!', null, 4000);
+        this.dispatchReturnOrError('Adding Lessee failed, plese try again!', null, 4000);
       });
   }
 
@@ -59,15 +54,23 @@ export class LesseeService {
     this._store.dispatch(new UI.StartLoading());
     this._db.collection('Lessees').doc(lesseeId).delete()
       .then(() => {
-        this._store.dispatch(new UI.StopLoading());
-        this._uiService.showSnackbar('Lessee successfully deleted!', null, 4000);
+        this.dispatchReturnOrError('Lessee successfully deleted!', null, 4000);
       }).catch(err => {
-        this._store.dispatch(new UI.StopLoading());
-        this._uiService.showSnackbar('Delete Lessee failed, plese try again!', null, 4000);
+        this.dispatchReturnOrError('Delete Lessee failed, plese try again!', null, 4000);
       });
   }
 
-  fetchLessee(key: string): void {
+  updateLessee(lesseeId: string, lessee: Lessee): void {
+    this._store.dispatch(new UI.StartLoading());
+    this._db.collection('Lessees').doc(lesseeId).update({ ...lessee })
+      .then(() => {
+        this.dispatchReturnOrError('Lessee successfully updated!', null, 4000);
+      }).catch(err => {
+        this.dispatchReturnOrError('Update Lessee failed, plese try again!', null, 4000);
+      });
+  }
+
+  fetchLessee(key: string): any {
     this._store.dispatch(new UI.StartLoading());
     this._firebaseSubs.push(
       this._db.collection('Lessees')
@@ -77,10 +80,14 @@ export class LesseeService {
           this._store.dispatch(new UI.StopLoading());
           this._store.dispatch(new LesseeActions.GetLessee(lessee));
         }, err => {
-          this._store.dispatch(new UI.StopLoading());
-          this._uiService.showSnackbar('Fetching Lessees failed, plese try again later', null, 4000);
+          this.dispatchReturnOrError('Fetching Lessees failed, plese try again later', null, 4000);
         })
     );
+  }
+
+  private dispatchReturnOrError(message: string, action: any, time: number): void {
+    this._store.dispatch(new UI.StopLoading());
+    this._uiService.showSnackbar(message, action, time);
   }
 
 }

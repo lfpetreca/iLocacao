@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import { Lessee } from '../../entities/lessee';
 import { LocalitiesService } from '../../../../shared/services/localities.service';
 import { LesseeService } from '../../services/lessees.service';
-import { UIService } from '../../../../shared/services/ui.service';
 import * as fromRoot from '../../../../app.reducer';
 import * as fromLessee from '../../lessees.reducer';
 

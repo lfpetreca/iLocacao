@@ -7,9 +7,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
     <mat-dialog-content>
       <p>Are you sure you want to delete {{passedData.lesseeName}}?</p>
     </mat-dialog-content>
-    <mat-dialog-actions>
-      <button mat-button [mat-dialog-close]="true">Yes</button>
-      <button mat-button [mat-dialog-close]="false">No</button>
+    <mat-dialog-actions fxLayoutAlign="flex-end">
+      <button mat-stroked-button color="warn" [mat-dialog-close]="true">Yes</button>
+      <button mat-stroked-button  [mat-dialog-close]="false">No</button>
     </mat-dialog-actions>`
 })
 export class DeleteLesseeComponent {

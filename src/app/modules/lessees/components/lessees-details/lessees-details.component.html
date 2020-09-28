@@ -1,8 +1,8 @@
 <mat-card fxFlex fxLayout="column">
     <div class="header">
         <mat-card-title-group class="header__title">
-            <mat-card-title>Add a new Lessee</mat-card-title>
-            <mat-card-subtitle>Here you can create a new lessee</mat-card-subtitle>
+            <mat-card-title>Lessee Details</mat-card-title>
+            <mat-card-subtitle>Here you can update lessee information</mat-card-subtitle>
         </mat-card-title-group>
     </div>
     <p>{{lessee$ | async | json }}</p>
@@ -85,7 +85,7 @@
         </mat-step>
         <mat-step [stepControl]="contactsForm">
             <form [formGroup]="contactsForm" (ngSubmit)="onSubmit()">
-                <ng-template matStepLabel>Fill out your name</ng-template>
+                <ng-template matStepLabel>Lessee contacts</ng-template>
                 <div>
                     <mat-form-field>
                         <mat-label>Email</mat-label>
