@@ -7,9 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Lessee } from '../../entities/lessee';
 import { LesseeService } from '../../services/lessees.service';
-import { UIService } from '../../../../shared/services/ui.service';
 import * as fromLessee from '../../lessees.reducer';
-import { DeleteLesseeComponent } from './delete-lessees.component';
+import { DialogDeleteComponent } from '../../../../shared/components/dialog/dialog-delete.component';
 
 @Component({
   selector: 'app-lessees-list',
@@ -26,7 +25,6 @@ export class LesseesListComponent implements OnInit, AfterViewInit {
   constructor(
     private _lesseeService: LesseeService,
     private _store: Store<fromLessee.State>,
-    private _uiService: UIService,
     private _dialog: MatDialog
   ) { }
 
@@ -49,7 +47,7 @@ export class LesseesListComponent implements OnInit, AfterViewInit {
   }
 
   deleteLessee(lesseeId: string, lessee: string): void {
-    const dialogRef = this._dialog.open(DeleteLesseeComponent, { data: { lesseeName: lessee } });
+    const dialogRef = this._dialog.open(DialogDeleteComponent, { data: { title: 'Lessee', name: lessee } });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {

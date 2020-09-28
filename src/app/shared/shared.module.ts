@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
 
 import { MaterialModule } from '../material.module';
+import { DialogDeleteComponent } from './components/dialog/dialog-delete.component';
 
 const modules = [
   CommonModule,
@@ -17,7 +18,9 @@ const modules = [
 ];
 
 @NgModule({
+  declarations: [DialogDeleteComponent],
   imports: [...modules],
-  exports: [...modules]
+  exports: [...modules, DialogDeleteComponent],
+  entryComponents: [DialogDeleteComponent]
 })
 export class SharedModule { }

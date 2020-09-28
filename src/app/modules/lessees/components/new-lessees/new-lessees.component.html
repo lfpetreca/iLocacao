@@ -84,7 +84,7 @@
         </mat-step>
         <mat-step [stepControl]="contactsForm">
             <form [formGroup]="contactsForm" (ngSubmit)="onSubmit()">
-                <ng-template matStepLabel>Lessee contacts</ng-template>
+                <ng-template matStepLabel>Lessee Contacts</ng-template>
                 <div>
                     <mat-form-field>
                         <mat-label>Email</mat-label>
@@ -92,9 +92,9 @@
                         <mat-error *ngIf="fContacts.controls.email.errors">Email is required</mat-error>
                     </mat-form-field>
                     <mat-form-field>
-                        <mat-label>Cellphone</mat-label>
-                        <input matInput formControlName="phone" mask="(00) 0 0000-0000" placeholder="(11) 9 5611-1666">
-                        <mat-error *ngIf="fContacts.controls.phone.errors">Cellphone is required</mat-error>
+                        <mat-label>Phone</mat-label>
+                        <input matInput formControlName="phone" mask="(00) 0000-0000||(00) 0 0000-0000" placeholder="(11) 9 5611-1666">
+                        <mat-error *ngIf="fContacts.controls.phone.errors">Phone is required</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="mt-5">
