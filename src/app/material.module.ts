@@ -19,6 +19,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatChipsModule } from '@angular/material/chips';
 
 const modules = [
   MatSidenavModule,
@@ -40,7 +42,9 @@ const modules = [
   MatSortModule,
   MatPaginatorModule,
   MatStepperModule,
-  MatDialogModule
+  MatDialogModule,
+  MatRadioModule,
+  MatChipsModule
 ];
 
 @NgModule({

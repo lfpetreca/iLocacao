@@ -8,6 +8,9 @@ import { UIService } from '../../shared/services/ui.service';
 import * as fromRoot from '../../app.reducer';
 import * as Auth from '../auth.actions';
 import * as UI from '../../shared/ui.actions';
+import { LesseeService } from '../../modules/lessees/services/lessees.service';
+import { RentersService } from '../../modules/renters/services/renters.service';
+import { PropertiesService } from '../../modules/properties/services/properties.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +21,10 @@ export class AuthService {
     private _router: Router,
     private _fireAuth: AngularFireAuth,
     private _uiService: UIService,
-    private _store: Store<fromRoot.State>
+    private _store: Store<fromRoot.State>,
+    private _lessee: LesseeService,
+    private _renter: RentersService,
+    private _property: PropertiesService
   ) { }
 
   initAuthListener(): void {
@@ -27,7 +33,10 @@ export class AuthService {
         this._store.dispatch(new Auth.SetAuthenticated());
         this._router.navigate(['/']);
       } else {
-        // this.INNERSERVICES.cancelSubscriptions();
+        this._lessee.cancelSubscriptions();
+        this._renter.cancelSubscriptions();
+        this._property.cancelSubscriptions();
+
         this._store.dispatch(new Auth.SetUnauthenticated());
         this._router.navigate(['/login']);
       }

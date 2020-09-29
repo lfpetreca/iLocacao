@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ChartsModule } from 'ng2-charts';
 
 import { SharedModule } from '../../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
@@ -9,7 +10,8 @@ import { HomeComponent } from './components/home/home.component';
   declarations: [HomeComponent],
   imports: [
     HomeRoutingModule,
-    SharedModule
+    SharedModule,
+    ChartsModule
   ]
 })
 export class HomeModule { }

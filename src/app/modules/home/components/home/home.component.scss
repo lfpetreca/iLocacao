@@ -1,0 +1,8 @@
+@import '../../../../../assets/scss/utilities';
+
+.home{ 
+    &__graficos{ display: flex; flex-direction: column; height: 100%;
+        @include breakpoint(md) { flex-direction: row; }
+        &-item { flex: 1; margin-bottom: 15px; }
+    }
+}

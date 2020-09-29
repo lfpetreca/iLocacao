@@ -1,1 +1,129 @@
-<p>properties-details works!</p>
+<mat-card fxFlex fxLayout="column">
+    <div class="header">
+        <mat-card-title-group class="header__title">
+            <mat-card-title>Add a new Lessee</mat-card-title>
+            <mat-card-subtitle>Here you can create a new lessee</mat-card-subtitle>
+        </mat-card-title-group>
+    </div>
+
+    <div class="isLoading" *ngIf="isLoading$ | async">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <mat-vertical-stepper linear #stepper *ngIf="!(isLoading$ | async)">
+        <mat-step [stepControl]="propertyForm">
+            <form [formGroup]="propertyForm">
+                <ng-template matStepLabel>Main Information</ng-template>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Reference Name</mat-label>
+                        <input matInput formControlName="reference" placeholder="Lessee Name">
+                        <mat-error *ngIf="f.controls.reference.errors">Reference name is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Owner</mat-label>
+                        <mat-select ngDefaultControl formControlName="renter">
+                            <mat-option *ngFor="let item of renters" value="{{item.id}}">{{item.name}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="f.controls.renter.errors">Owner is required</mat-error>
+                    </mat-form-field>
+
+                    <div class="radios-form-field">
+                        <p>Property Type:</p>
+                        <mat-radio-group formControlName="propertyType" color="primary">
+                            <mat-radio-button class="mr-3 mb-3" *ngFor="let type of propertyTypes" value="{{type}}">
+                                {{type | titlecase }}</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div class="radios-form-field">
+                        <p>Property Status:</p>
+                        <mat-radio-group formControlName="status" color="primary">
+                            <mat-radio-button class="mr-3 mb-3" *ngFor="let status of propertyStatus"
+                                value="{{status}}">{{status | titlecase}}</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <button mat-raised-button matStepperNext color="primary">Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="pricesForm">
+            <form [formGroup]="pricesForm">
+                <ng-template matStepLabel>Property Prices</ng-template>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Rent Value</mat-label>
+                        <input matInput formControlName="rent" mask="separator.2" thousandSeparator="," prefix="R$ ">
+                        <mat-error *ngIf="fPrices.controls.rent.errors">Rent value is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Taxes Value</mat-label>
+                        <input matInput formControlName="taxes" mask="separator.2" thousandSeparator="," prefix="R$ ">
+                        <mat-error *ngIf="fPrices.controls.taxes.errors">Taxes value is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Condominium Value</mat-label>
+                        <input matInput formControlName="condominium" mask="separator.2" thousandSeparator=","
+                            prefix="R$ ">
+                        <mat-error *ngIf="fPrices.controls.condominium.errors">Condominium value is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="mt-5">
+                    <button mat-button matStepperPrevious color="primary">Return</button>
+                    <button mat-raised-button matStepperNext color="primary">Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="addressForm">
+            <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+                <ng-template matStepLabel>Property Address</ng-template>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Street</mat-label>
+                        <input matInput formControlName="street" placeholder="Eg: Av. Pedro Álvares Cabral">
+                        <mat-error *ngIf="fAddress.controls.street.errors">Street name is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Number</mat-label>
+                        <input matInput formControlName="number" placeholder="Eg: 159">
+                        <mat-error *ngIf="fAddress.controls.number.errors">Number is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Neighborhood</mat-label>
+                        <input matInput formControlName="neighborhood" placeholder="Eg: Vila Mariana">
+                        <mat-error *ngIf="fAddress.controls.neighborhood.errors">Neighborhood is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Zip Code</mat-label>
+                        <input matInput formControlName="zipCode" mask="00000-000" placeholder="Eg: 04094-050">
+                        <mat-error *ngIf="fAddress.controls.zipCode.errors">Zip Code is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>City</mat-label>
+                        <mat-select ngDefaultControl formControlName="city">
+                            <mat-option *ngFor="let city of cities" value="{{city}}">{{city}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="fAddress.controls.city.errors">City is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>State</mat-label>
+                        <mat-select #state ngDefaultControl formControlName="uf"
+                            (selectionChange)="getTheCities(state.value)">
+                            <mat-option *ngFor="let state of states" value="{{state.acronym}}">{{state.state}} -
+                                {{state.acronym}}</mat-option>
+                            <mat-error *ngIf="fAddress.controls.uf.errors">State is required</mat-error>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="mt-5">
+                    <button mat-button matStepperPrevious color="primary">Return</button>
+                    <button mat-raised-button color="primary" type="submit"
+                        [disabled]="fAddress.invalid">Submit</button>
+                </div>
+            </form>
+        </mat-step>
+
+    </mat-vertical-stepper>
+</mat-card>

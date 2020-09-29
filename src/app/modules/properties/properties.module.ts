@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '../../shared/shared.module';
 import { PropertiesRoutingModule } from './properties-routing.module';
@@ -6,7 +7,7 @@ import { PropertiesComponent } from './components/properties/properties.componen
 import { PropertiesDetailsComponent } from './components/properties-details/properties-details.component';
 import { PropertiesListComponent } from './components/properties-list/properties-list.component';
 import { NewPropertiesComponent } from './components/new-properties/new-properties.component';
-
+import { propertyReducer } from './properties.reducers';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NewPropertiesComponent } from './components/new-properties/new-properti
   ],
   imports: [
     SharedModule,
-    PropertiesRoutingModule
+    PropertiesRoutingModule,
+    StoreModule.forFeature('properties', propertyReducer)
   ]
 })
 export class PropertiesModule { }

@@ -90,4 +90,8 @@ export class LesseeService {
     this._uiService.showSnackbar(message, action, time);
   }
 
+  cancelSubscriptions(): void {
+    this._firebaseSubs.map(sub => sub.unsubscribe());
+  }
+
 }

@@ -36,7 +36,8 @@
               "firebase",
               "@firebase/app",
               "@firebase/auth",
-              "@firebase/firestore"
+              "@firebase/firestore",
+              "chart.js"
             ]
           },
           "configurations": {

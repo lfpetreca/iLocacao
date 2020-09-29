@@ -1,1 +1,14 @@
-<p>properties works!</p>
+<mat-card>
+    <h2>Properties</h2>
+    <mat-tab-group>
+        <mat-tab>
+            <ng-template mat-tab-label>Properties List</ng-template>
+            <app-properties-list></app-properties-list>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>Add New Property</ng-template>
+            <app-new-properties></app-new-properties>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>
